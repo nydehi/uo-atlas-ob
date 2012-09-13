@@ -1,0 +1,53 @@
+3
++TERRAIN: 933 107 5 Winter Spur
+-POINTOFINTEREST: 984 196 5 Fan Dancers Dojo entrance
++TERRAIN: 798 245 5 Beetlescape
++ISLAND: 351 253 5 Revenant Jima
++BODYOFWATER: 475 384 5 Homare's Eye
++TERRAIN: 1095 397 5 Yamandon Point
+-POINTOFINTEREST: 321 409 5 Bushido Dojo
++TERRAIN: 658 410 5 Sho Toh
++POINT: 949 438 5 Valley of the Sleeping Dragons (champ spawn: Serado the Awakened)
+-POINTOFINTEREST: 1231 488 5 Ferret Racetrack
++SHRINE: 1047 508 5 Shrine of Isamu
++TERRAIN: 1165 515 5 Tsuki Garden
++TERRAIN: 545 519 5 Kitsune Woods
++ISLAND: 335 588 5 Homare-Jima
++ISLAND: 1094 592 5 Isamu-Jima
+-POINTOFINTEREST: 409 593 5 Zen maze
++TERRAIN: 165 628 5 Field of Echoes
++MOONGATE: 270 628 5 Homare-Jima moongate
++TERRAIN: 923 654 5 Hiryu Forest
++TERRAIN: 1162 684 5 Mount Sho
++SHRINE: 296 711 5 Shrine of Homare
+-POINTOFINTEREST: 821 733 5 Lightest Dark
++DUNGEON: 259 784 5 Yomotsu mines
++TERRAIN: 376 812 5 Lightning Watch
++BODYOFWATER: 1042 827 5 Lotus Lakes
++TERRAIN: 1211 857 5 Hotaka Plains
++TERRAIN: 1386 920 5 Mount Hakonu
++TERRAIN: 665 926 5 The Waste
++BODYOFWATER: 1069 949 5 Lake Kappa
++MOONGATE: 1169 998 5 Isamu-Jima Moongate
++TERRAIN: 659 1071 5 Phoenix Mountains
++TERRAIN: 229 1080 5 Crane Marsh
++TERRAIN: 1199 1097 5 Storm Point
++ISLAND: 730 1124 5 Makoto-Jima
++SHRINE: 718 1160 5 Shrine of Makoto
++MOONGATE: 802 1204 5 Makoto-Jima moongate
+-INN: 680 1218 5 Miyabi Inn
+-TAILOR: 733 1220 5 Suteki Na Craftworks
+-HEALER: 781 1225 5 Satori Healing Garden
+-TAVERN: 695 1227 5 Sake Saka Tavern
+-BAKER: 709 1253 5 Koku Kitchens
+-BANK: 737 1255 5 Bank of Zento
+-BLACKSMITH: 768 1256 5 Mibu Blacksmith
++TOWN: 741 1261 5 Zento
+-POINTOFINTEREST: 677 1271 5 Ministry of Trade (10 LToT = 1 GToT)
+-LIBRARY: 677 1278 5 Rokuon Cultural Center and Shop
+-PROVISIONER: 734 1282 5 Provisioner
+-STABLE: 789 1282 5 Yume Stables
+-MAGE: 700 1297 5 Sasara Magical Supplies and Remidies
+-JEWELER: 721 1297 5 Good Fortunes Jewelry
+-BOWYER: 785 1301 5 Kagome Bowyer
+-ARMOURERSGUILD: 761 1303 5 Iroha Armorer and Musha-Shugyo Dojo

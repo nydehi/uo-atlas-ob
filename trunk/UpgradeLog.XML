@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="UO Atlas">
+</Property><Property Name="Solution File" Value="C:\Users\JWilliams\Desktop\UO Atlas\UO Atlas.sln">
+</Property><Property Name="User Options File" Value="C:\Users\JWilliams\Desktop\UO Atlas\UO Atlas.suo">
+</Property><Property Name="Date" Value="Thursday, September 13, 2012">
+</Property><Property Name="Time" Value="9:01 AM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="UO Atlas.sln" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas.sln">
+</Event><Event ErrorLevel="0" Project="" Source="UO Atlas.suo" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas.suo">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UO Atlas.csproj" Description="Project file successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UO Atlas.csproj">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Controls\EventArgs.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Controls\EventArgs.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Controls\MapViewer.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Controls\MapViewer.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Controls\MapViewer.Designer.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Controls\MapViewer.Designer.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Dialogs\AboutBox.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Dialogs\AboutBox.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Dialogs\AboutBox.Designer.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Dialogs\AboutBox.Designer.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Dialogs\MapImageGenerationDialog.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Dialogs\MapImageGenerationDialog.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Dialogs\MapImageGenerationDialog.Designer.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Dialogs\MapImageGenerationDialog.Designer.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\MapImageGenerator.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\MapImageGenerator.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\MainForm.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\MainForm.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\MainForm.Designer.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\MainForm.Designer.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Map.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Map.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UO Atlas.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UO Atlas.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Properties\Resources.Designer.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Properties\Settings.Designer.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\Animations.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\Animations.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\Art.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\Art.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\ASCIIFont.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\ASCIIFont.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\CalibrationInfo.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\CalibrationInfo.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\Client.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\Client.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\ClientHandles.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\ClientHandles.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\FileIndex.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\FileIndex.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\Gumps.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\Gumps.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\Hues.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\Hues.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\LocationPointer.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\LocationPointer.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\Map.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\Map.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\Multis.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\Multis.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\NativeMethods.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\NativeMethods.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\ProcessStream.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\ProcessStream.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\Sound.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\Sound.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\StringEntry.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\StringEntry.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\StringList.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\StringList.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\Textures.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\Textures.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\TileData.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\TileData.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\TileList.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\TileList.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\TileMatrix.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\TileMatrix.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\TileMatrixPatch.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\TileMatrixPatch.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\Verdata.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\Verdata.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UltimaSDK\WindowProcessStream.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\UltimaSDK\WindowProcessStream.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Utility.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Utility.cs">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Properties\Settings.settings" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Resources\info_16.png" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Resources\info_16.png">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\License.txt" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\License.txt">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Controls\MapViewer.resx" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Controls\MapViewer.resx">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Dialogs\AboutBox.resx" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Dialogs\AboutBox.resx">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Dialogs\MapImageGenerationDialog.resx" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Dialogs\MapImageGenerationDialog.resx">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\MainForm.resx" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\MainForm.resx">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\Properties\Resources.resx" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup\UO Atlas\Properties\Resources.resx">
+</Event><Event ErrorLevel="1" Project="UO Atlas" Source="UO Atlas\UO Atlas.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UO Atlas.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="UO Atlas" Source="UO Atlas\UO Atlas.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="UO Atlas.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="UO Atlas.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="UO Atlas" Source="UO Atlas\UO Atlas.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

@@ -1,0 +1,41 @@
+3
+-LIBRARY: 3615 2476 2 Haven Public Library
+-TAILOR: 3687 2477 2 A Stitch in Time Tailor Shop
+-POINTOFINTEREST: 3603 2494 2 Companions' Hall
+-CARPENTER: 3642 2504 2 Carpenters of Haven
+-TINKER: 3667 2506 2 Haven Clockworks and Tinker Shop
+-THIEVESGUILD: 3693 2509 2 The Haven Thieves' Guild
+-BARDICGUILD: 3666 2531 2 Bardic Guild
+-BAKER: 3628 2540 2 The Shakin' Bakery
++TOWN: 3649 2569 2 Haven
+-MAGE: 3632 2573 2 The Little Shop of Magic
+-WEAPONSGUILD: 3731 2578 2 Weaponsmith
+-HEALER: 3665 2581 2 The Healers of Haven
++LANDMARK: 3610 2585 2 Uzeraan's Mansion
+-BOWYER: 3745 2585 2 Archers
+-POINTOFINTEREST: 3595 2588 2 Uzeraan, Keeper of Quests
+-BLACKSMITH: 3594 2595 2 Blacksmith
+-PROVISIONER: 3673 2595 2 Last Chance Provisioners
+-ARMOURERSGUILD: 3587 2601 2 Armoury
+-INN: 3671 2615 2 The Bountiful Harvest
+-BANK: 3620 2617 2 The Second Bank of Haven
+-BLACKSMITH: 3645 2617 2 The Haven Blacksmith
+-SHIPWRIGHT: 3636 2642 2 Mapmaker's of Haven
+-BUTCHER: 3714 2651 2 The Prime Cut Butcher Shop
+-TAVERN: 3668 2652 2 The Albatross Bar and Grill
++GRAVEYARD: 3404 2653 2 graveyard
+-OTHER: 3752 2661 2 Brigands
++SHRINE: 3359 2679 2 Ank of Sacrifice
+-OTHER: 3716 2684 2 Brigands
+-OTHER: 3752 2703 2 Brigands
+-MINERSGUILD: 3754 2704 2 Miners
++LANDMARK: 3610 2740 2 Mining Cave
++TERRAIN: 3690 2760 2 Mountain Pass
++LANDMARK: 3519 2787 2 Old Mine Entrance - Closed
++LANDMARK: 3589 2808 2 Mongbat Tower
+-ARCHERSGUILD: 3592 2828 2 
++LANDMARK: 3715 2838 2 Hunters Cabin
++LANDMARK: 3498 2844 2 Mining Cave
++GRAVEYARD: 3649 2859 2 Graveyard
++LANDMARK: 3595 2865 2 Loggers Camp
++LANDMARK: 3457 3056 2 Lighthouse
