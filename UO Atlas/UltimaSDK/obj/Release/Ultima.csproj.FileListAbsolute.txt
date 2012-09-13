@@ -1,0 +1,3 @@
+C:\Users\JWilliams\Desktop\UO Atlas\UO Atlas\UltimaSDK\bin\Release\Ultima.dll
+C:\Users\JWilliams\Desktop\UO Atlas\UO Atlas\UltimaSDK\obj\Release\ResolveAssemblyReference.cache
+C:\Users\JWilliams\Desktop\UO Atlas\UO Atlas\UltimaSDK\obj\Release\Ultima.dll
