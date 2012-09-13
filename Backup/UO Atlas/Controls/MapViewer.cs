@@ -21,18 +21,16 @@ namespace UO_Atlas
 {
     public enum ZoomLevel
     {
-        PercentOneSixteenth = 0,
-        PercentOneEighth,
-        PercentOneQuarter,
-        PercentOneHalf,
-        PercentOneHundred,
-        PercentTwoHundred,
-        PercentFourHundred,
-        PercentEightHundred,
-        PercentSixteenHundred,
+        Percent50 = 0,
+        Percent100,
+        Percent200,
+        Percent400,
+        Percent800,
+        Percent1600,
+        Percent3200,
 
-        MinimumZoom = PercentOneSixteenth,
-        MaximumZoom = PercentSixteenHundred
+        MinimumZoom = Percent50,
+        MaximumZoom = Percent3200
     }
 
     /// <summary>
@@ -97,21 +95,18 @@ namespace UO_Atlas
 
             // Set the value of the double-buffering style bits to true.
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.ResizeRedraw |
-              ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
+              ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);//, true);
         }
 
         private void SetZoomInfo()
         {
-            m_ZoomInfos.Add(ZoomLevel.PercentOneSixteenth, new ZoomInfo(ZoomLevel.PercentOneSixteenth, "map{0}-6.25%.png", 0.06250f, 1));
-            m_ZoomInfos.Add(ZoomLevel.PercentOneEighth, new ZoomInfo(ZoomLevel.PercentOneEighth, "map{0}-12.5%.png", 0.125f, 1));
-            m_ZoomInfos.Add(ZoomLevel.PercentOneQuarter, new ZoomInfo(ZoomLevel.PercentOneQuarter, "map{0}-25%.png", 0.250f, 1));
-            m_ZoomInfos.Add(ZoomLevel.PercentOneHalf, new ZoomInfo(ZoomLevel.PercentOneHalf, "map{0}-50%.png", 0.500f, 1));
-            m_ZoomInfos.Add(ZoomLevel.PercentOneHundred, new ZoomInfo(ZoomLevel.PercentOneHundred, "map{0}-100%.png", 1.000f, 1));
-            m_ZoomInfos.Add(ZoomLevel.PercentTwoHundred, new ZoomInfo(ZoomLevel.PercentTwoHundred, "map{0}-100%.png", 2.0f, 2));
-            m_ZoomInfos.Add(ZoomLevel.PercentFourHundred, new ZoomInfo(ZoomLevel.PercentFourHundred, "map{0}-100%.png", 4.0f, 4));
-
-            m_ZoomInfos.Add(ZoomLevel.PercentEightHundred, new ZoomInfo(ZoomLevel.PercentEightHundred, "map{0}-100%.png", 8.0f, 8));
-            m_ZoomInfos.Add(ZoomLevel.PercentSixteenHundred, new ZoomInfo(ZoomLevel.PercentSixteenHundred, "map{0}-100%.png", 16.0f, 16));
+            m_ZoomInfos.Add(ZoomLevel.Percent50, new ZoomInfo(ZoomLevel.Percent50, "map{0}-50%.png", 0.06250f, 1));
+            m_ZoomInfos.Add(ZoomLevel.Percent100, new ZoomInfo(ZoomLevel.Percent100, "map{0}-100%.png", 0.125f, 1));
+            m_ZoomInfos.Add(ZoomLevel.Percent200, new ZoomInfo(ZoomLevel.Percent200, "map{0}-200%.png", 0.250f, 1));
+            m_ZoomInfos.Add(ZoomLevel.Percent400, new ZoomInfo(ZoomLevel.Percent400, "map{0}-400%.png", 0.500f, 1));
+            m_ZoomInfos.Add(ZoomLevel.Percent800, new ZoomInfo(ZoomLevel.Percent800, "map{0}-800%.png", 1.000f, 1));
+            m_ZoomInfos.Add(ZoomLevel.Percent1600, new ZoomInfo(ZoomLevel.Percent1600, "map{0}-800%.png", 2.0f, 2));
+            m_ZoomInfos.Add(ZoomLevel.Percent3200, new ZoomInfo(ZoomLevel.Percent3200, "map{0}-800%.png", 4.0f, 4));
         }
 
         private Map m_Map;
@@ -210,7 +205,6 @@ namespace UO_Atlas
         /// </summary>
         private int ImageZoom { get { return m_ZoomInfos[m_ZoomLevel].ImageZoom; } }
 
-
         public void Zoom(int steps)
         {
             if (steps == 0)
@@ -256,83 +250,76 @@ namespace UO_Atlas
             //draw image
             if (m_MapImage != null)
             {
-                try
+                // if the image fits into canvas completely
+                if (m_CanvasSize.Width > m_MapImage.Width && m_CanvasSize.Height > m_MapImage.Height)
                 {
+                    int x = 0, y = 0;
 
-                    // if the image fits into canvas completely
-                    if (m_CanvasSize.Width > m_MapImage.Width && m_CanvasSize.Height > m_MapImage.Height)
+                    Graphics g = e.Graphics;
+
+                    while (x < m_CanvasSize.Width)
                     {
-                        int x = 0, y = 0;
+                        y = 0;
 
-                        Graphics g = e.Graphics;
-
-                        while (x < m_CanvasSize.Width)
+                        while (y < m_CanvasSize.Height)
                         {
-                            y = 0;
-
-                            while (y < m_CanvasSize.Height)
-                            {
-                                g.DrawImage(m_MapImage, x, y);
-                                y += m_MapImage.Height;
-                            }
-
-                            x += m_MapImage.Width;
+                            g.DrawImage(m_MapImage, x, y);
+                            y += m_MapImage.Height;
                         }
 
+                        x += m_MapImage.Width;
                     }
-                    // if the image fits NOT into canvas, show a part
-                    else
-                    {
-                        Rectangle sourceRect, destRect;
 
-                        // the coordinates of the top-left corner of the map-image
-                        int X = (int) (m_PaintLocation.X * RealZoom / ImageZoom);
-                        int Y = (int) (m_PaintLocation.Y * RealZoom / ImageZoom);
-
-                        // width and length of the visible map-rectangle
-                        int Width = (int) (m_CanvasSize.Width / ImageZoom);
-                        int Height = (int) (m_CanvasSize.Height / ImageZoom);
-
-                        sourceRect = new Rectangle(X, Y, Width, Height); // which part of the image will be painted?
-                        destRect = new Rectangle(0, 0, m_CanvasSize.Width, m_CanvasSize.Height); // paint into the canvas
-
-                        Graphics g = e.Graphics;
-                        g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
-
-                        // Calculate whether the source-retangle reaches the border of the map
-                        int rightBorder = (int) (X + Width - m_Map.Width * RealZoom / ImageZoom);
-                        int bottomBorder = (int) (Y + Height - m_Map.Height * RealZoom / ImageZoom);
-
-                        // the sourceRectangle reaches over the right border of the map
-                        if (rightBorder >= 0)
-                        {
-                            sourceRect = new Rectangle(0, Y, rightBorder, m_CanvasSize.Height * ImageZoom);
-                            destRect = new Rectangle(m_CanvasSize.Width - rightBorder, 0, rightBorder, m_CanvasSize.Height);
-
-                            g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
-                        }
-
-                        // the sourceRectangle reaches over the bottom border of the map
-                        if (bottomBorder >= 0)
-                        {
-                            sourceRect = new Rectangle(X, 0, m_CanvasSize.Width * ImageZoom, bottomBorder);
-                            destRect = new Rectangle(0, m_CanvasSize.Height - bottomBorder, m_CanvasSize.Width, bottomBorder);
-
-                            g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
-                        }
-
-                        // the sourceRectangle reaches over the right and the bottom border of the map
-                        if (rightBorder >= 0 && bottomBorder >= 0)
-                        {
-                            sourceRect = new Rectangle(0, 0, rightBorder, bottomBorder);
-                            destRect = new Rectangle(m_CanvasSize.Width - rightBorder, m_CanvasSize.Height - bottomBorder, rightBorder, bottomBorder);
-
-                            g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
-                        }
-                    }
                 }
-                catch
+                // if the image fits NOT into canvas, show a part
+                else
                 {
+                    Rectangle sourceRect, destRect;
+
+                    // the coordinates of the top-left corner of the map-image
+                    int X = (int)(m_PaintLocation.X * RealZoom / ImageZoom);
+                    int Y = (int)(m_PaintLocation.Y * RealZoom / ImageZoom);
+
+                    // width and length of the visible map-rectangle
+                    int Width = (int)(m_CanvasSize.Width / ImageZoom);
+                    int Height = (int)(m_CanvasSize.Height / ImageZoom);
+
+                    sourceRect = new Rectangle(X, Y, Width, Height); // which part of the image will be painted?
+                    destRect = new Rectangle(0, 0, m_CanvasSize.Width, m_CanvasSize.Height); // paint into the canvas
+
+                    Graphics g = e.Graphics;
+                    g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
+
+                    // Calculate whether the source-retangle reaches the border of the map
+                    int rightBorder = (int)(X + Width - m_Map.Width * RealZoom / ImageZoom);
+                    int bottomBorder = (int)(Y + Height - m_Map.Height * RealZoom / ImageZoom);
+
+                    // the sourceRectangle reaches over the right border of the map
+                    if (rightBorder >= 0)
+                    {
+                        sourceRect = new Rectangle(0, Y, rightBorder, m_CanvasSize.Height * ImageZoom);
+                        destRect = new Rectangle(m_CanvasSize.Width - rightBorder, 0, rightBorder, m_CanvasSize.Height);
+
+                        g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
+                    }
+
+                    // the sourceRectangle reaches over the bottom border of the map
+                    if (bottomBorder >= 0)
+                    {
+                        sourceRect = new Rectangle(X, 0, m_CanvasSize.Width * ImageZoom, bottomBorder);
+                        destRect = new Rectangle(0, m_CanvasSize.Height - bottomBorder, m_CanvasSize.Width, bottomBorder);
+
+                        g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
+                    }
+
+                    // the sourceRectangle reaches over the right and the bottom border of the map
+                    if (rightBorder >= 0 && bottomBorder >= 0)
+                    {
+                        sourceRect = new Rectangle(0, 0, rightBorder, bottomBorder);
+                        destRect = new Rectangle(m_CanvasSize.Width - rightBorder, m_CanvasSize.Height - bottomBorder, rightBorder, bottomBorder);
+
+                        g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
+                    }
                 }
             }
         }
@@ -358,26 +345,22 @@ namespace UO_Atlas
         {
             switch (m_ZoomLevel)
             {
-                case ZoomLevel.PercentOneSixteenth:
-                    return "1/16x";
-                case ZoomLevel.PercentOneEighth:
-                    return " 1/8x";
-                case ZoomLevel.PercentOneQuarter:
-                    return " 1/4x";
-                case ZoomLevel.PercentOneHalf:
-                    return " 1/2x";
-                case ZoomLevel.PercentOneHundred:
-                    return "   1x";
-                case ZoomLevel.PercentTwoHundred:
-                    return "   2x";
-                case ZoomLevel.PercentFourHundred:
-                    return "   4x";
-                case ZoomLevel.PercentEightHundred:
-                    return "   8x";
-                case ZoomLevel.PercentSixteenHundred:
-                    return "  16x";
+                case ZoomLevel.Percent50:
+                    return "50%";
+                case ZoomLevel.Percent100:
+                    return "100%";
+                case ZoomLevel.Percent200:
+                    return "200%";
+                case ZoomLevel.Percent400:
+                    return "400%";
+                case ZoomLevel.Percent800:
+                    return "800%";
+                case ZoomLevel.Percent1600:
+                    return "1600%";
+                case ZoomLevel.Percent3200:
+                    return "3200%";
                 default:
-                    return "   1x";
+                    return "50%";
             }
         }
 

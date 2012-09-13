@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="UO Atlas">
+</Property><Property Name="Solution File" Value="C:\Users\JWilliams\Desktop\UO Atlas\UO Atlas.sln">
+</Property><Property Name="Date" Value="Thursday, September 13, 2012">
+</Property><Property Name="Time" Value="9:26:30 AM">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Ultima.csproj" Description="Project file successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Ultima.csproj">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Ultima.csproj.user" Description="Project user file successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Ultima.csproj.user">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Animations.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Animations.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Art.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Art.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\ASCIIFont.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\ASCIIFont.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\CalibrationInfo.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\CalibrationInfo.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Client.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Client.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\ClientHandles.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\ClientHandles.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\FileIndex.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\FileIndex.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Gumps.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Gumps.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Hues.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Hues.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\LocationPointer.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\LocationPointer.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Map.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Map.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Multis.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Multis.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\NativeMethods.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\NativeMethods.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\ProcessStream.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\ProcessStream.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Skills.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Skills.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Sound.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Sound.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\StringEntry.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\StringEntry.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\StringList.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\StringList.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Textures.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Textures.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\TileData.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\TileData.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\TileList.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\TileList.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\TileMatrix.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\TileMatrix.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\TileMatrixPatch.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\TileMatrixPatch.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Verdata.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\Verdata.cs">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\WindowProcessStream.cs" Description="File successfully backed up as C:\Users\JWilliams\Desktop\UO Atlas\Backup1\WindowProcessStream.cs">
+</Event><Event ErrorLevel="1" Project="Ultima" Source="UO Atlas\UltimaSDK\Ultima.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Ultima.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Ultima" Source="UO Atlas\UltimaSDK\Ultima.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Ultima" Source="UO Atlas\UltimaSDK\Ultima.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
