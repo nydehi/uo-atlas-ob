@@ -78,6 +78,7 @@
     <Compile Include="Dialogs\MapImageGenerationDialog.Designer.cs">
       <DependentUpon>MapImageGenerationDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Label.cs" />
     <Compile Include="MapImageGenerator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -203,7 +204,15 @@
     <None Include="Resources\info_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="License.txt" />
+    <Content Include="icons.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="License.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

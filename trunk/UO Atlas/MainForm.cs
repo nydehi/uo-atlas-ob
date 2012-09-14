@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -154,6 +155,8 @@ namespace UO_Atlas
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            LabelCategory.LoadCache();
+
             mapViewer.OnMapChanged += new EventHandler<MapViewerEventArgs>(OnMapChanged);
             mapViewer.OnZoomLevelChanged += new EventHandler<MapViewerEventArgs>(OnZoomLevelChanged);
             mapViewer.OnError += new ErrorEventHandler(OnError);
@@ -254,6 +257,46 @@ namespace UO_Atlas
         private void menuStayOnTop_CheckedChanged(object sender, EventArgs e)
         {
             TopMost = menuStayOnTop.Checked;
+        }
+
+        private void menuImportLabels_Click(object sender, EventArgs e)
+        {
+            string[] filesToImportAsLabels;
+
+            using(OpenFileDialog d = new OpenFileDialog())
+            {
+                d.CheckFileExists = true;
+                d.CheckPathExists = true;
+                d.Multiselect = true;
+                d.ReadOnlyChecked = true;
+                
+                if(d.ShowDialog(this) != DialogResult.OK)
+                {
+                    return;
+                }
+
+                filesToImportAsLabels = d.FileNames;
+            }
+
+            foreach (string fileToImportAsLabels in filesToImportAsLabels)
+            {
+                using (StreamReader reader = new StreamReader(fileToImportAsLabels))
+                {
+                    // The first line is a version number that can be ignored.
+                    reader.ReadLine();
+
+                    UO_Atlas.Label label;
+                    do
+                    {
+                        label = Label.LoadFrom(reader);
+                        if (label != null)
+                        {
+                            System.Diagnostics.Debug.WriteLine(label.Category.Name + ": " + label.Text);
+                        }
+                    } while (label != null);
+                    
+                }
+            }
         }
     }
 }

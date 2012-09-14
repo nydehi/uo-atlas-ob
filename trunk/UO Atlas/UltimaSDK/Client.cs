@@ -436,7 +436,10 @@ namespace Ultima
             if (NativeMethods.IsWindow(hWnd = NativeMethods.FindWindowA("Ultima Online Third Dawn", null)) != 0)
 				return hWnd;
 
-			Console.WriteLine("not found :/");
+            if (NativeMethods.IsWindow(hWnd = NativeMethods.FindWindowA("Ultima Online Third Dawn", null)) != 0)
+                return hWnd;
+
+			Console.WriteLine("A running client was not found :/");
 
 			return ClientWindowHandle.Invalid;
 		}
