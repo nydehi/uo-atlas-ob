@@ -17,7 +17,7 @@ Mousewheel up/down:     Zoom in/out
 Copyright information:
 ")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("initiated by Brutus5000")]
+[assembly: AssemblyCompany("Initiated by Brutus5000, continued by Trox")]
 [assembly: AssemblyProduct("UO Atlas")]
 [assembly: AssemblyCopyright("Licensed under the GPL v2.0")]
 [assembly: AssemblyTrademark("")]
@@ -38,5 +38,5 @@ Copyright information:
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
