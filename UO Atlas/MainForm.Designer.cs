@@ -46,14 +46,15 @@ namespace UO_Atlas
             this.lblPlayerCoords = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblHoveredCoordsTitle = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblHoveredCoords = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tabControlMaps = new System.Windows.Forms.TabControl();
-            this.tabPageFelucca = new System.Windows.Forms.TabPage();
-            this.tabPageTrammel = new System.Windows.Forms.TabPage();
-            this.tabPageIlshenar = new System.Windows.Forms.TabPage();
-            this.tabPageMalas = new System.Windows.Forms.TabPage();
-            this.tabPageTokuno = new System.Windows.Forms.TabPage();
             this.tabPageTerMur = new System.Windows.Forms.TabPage();
+            this.tabPageTokuno = new System.Windows.Forms.TabPage();
+            this.tabPageMalas = new System.Windows.Forms.TabPage();
+            this.tabPageIlshenar = new System.Windows.Forms.TabPage();
+            this.tabPageTrammel = new System.Windows.Forms.TabPage();
+            this.tabPageFelucca = new System.Windows.Forms.TabPage();
+            this.tabControlMaps = new System.Windows.Forms.TabControl();
             this.mapViewer = new UO_Atlas.MapViewer();
+            this.menuImportLabels = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.tabControlMaps.SuspendLayout();
@@ -82,6 +83,7 @@ namespace UO_Atlas
             this.menuTrackPlayer,
             this.menuStayOnTop,
             this.menuHideControls,
+            this.menuImportLabels,
             this.menuSettings,
             this.toolStripSeparator1,
             this.menuExit});
@@ -104,7 +106,7 @@ namespace UO_Atlas
             this.menuStayOnTop.CheckOnClick = true;
             this.menuStayOnTop.Name = "menuStayOnTop";
             this.menuStayOnTop.Size = new System.Drawing.Size(191, 22);
-            this.menuStayOnTop.Text = "Stay On Top";
+            this.menuStayOnTop.Text = "&Stay On Top";
             this.menuStayOnTop.CheckedChanged += new System.EventHandler(this.menuStayOnTop_CheckedChanged);
             // 
             // menuHideControls
@@ -215,6 +217,66 @@ namespace UO_Atlas
             this.lblHoveredCoords.Text = "(?,?)";
             this.lblHoveredCoords.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tabPageTerMur
+            // 
+            this.tabPageTerMur.Location = new System.Drawing.Point(4, 25);
+            this.tabPageTerMur.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageTerMur.Name = "tabPageTerMur";
+            this.tabPageTerMur.Size = new System.Drawing.Size(584, 0);
+            this.tabPageTerMur.TabIndex = 5;
+            this.tabPageTerMur.Text = "Ter Mur";
+            this.tabPageTerMur.UseVisualStyleBackColor = true;
+            // 
+            // tabPageTokuno
+            // 
+            this.tabPageTokuno.Location = new System.Drawing.Point(4, 25);
+            this.tabPageTokuno.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageTokuno.Name = "tabPageTokuno";
+            this.tabPageTokuno.Size = new System.Drawing.Size(584, 0);
+            this.tabPageTokuno.TabIndex = 4;
+            this.tabPageTokuno.Text = "Tokuno";
+            this.tabPageTokuno.UseVisualStyleBackColor = true;
+            // 
+            // tabPageMalas
+            // 
+            this.tabPageMalas.Location = new System.Drawing.Point(4, 25);
+            this.tabPageMalas.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageMalas.Name = "tabPageMalas";
+            this.tabPageMalas.Size = new System.Drawing.Size(584, 0);
+            this.tabPageMalas.TabIndex = 3;
+            this.tabPageMalas.Text = "Malas";
+            this.tabPageMalas.UseVisualStyleBackColor = true;
+            // 
+            // tabPageIlshenar
+            // 
+            this.tabPageIlshenar.Location = new System.Drawing.Point(4, 25);
+            this.tabPageIlshenar.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageIlshenar.Name = "tabPageIlshenar";
+            this.tabPageIlshenar.Size = new System.Drawing.Size(584, 0);
+            this.tabPageIlshenar.TabIndex = 2;
+            this.tabPageIlshenar.Text = "Ilshenar";
+            this.tabPageIlshenar.UseVisualStyleBackColor = true;
+            // 
+            // tabPageTrammel
+            // 
+            this.tabPageTrammel.Location = new System.Drawing.Point(4, 25);
+            this.tabPageTrammel.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageTrammel.Name = "tabPageTrammel";
+            this.tabPageTrammel.Size = new System.Drawing.Size(584, 0);
+            this.tabPageTrammel.TabIndex = 1;
+            this.tabPageTrammel.Text = "Trammel";
+            this.tabPageTrammel.UseVisualStyleBackColor = true;
+            // 
+            // tabPageFelucca
+            // 
+            this.tabPageFelucca.Location = new System.Drawing.Point(4, 25);
+            this.tabPageFelucca.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageFelucca.Name = "tabPageFelucca";
+            this.tabPageFelucca.Size = new System.Drawing.Size(584, 0);
+            this.tabPageFelucca.TabIndex = 0;
+            this.tabPageFelucca.Text = "Felucca";
+            this.tabPageFelucca.UseVisualStyleBackColor = true;
+            // 
             // tabControlMaps
             // 
             this.tabControlMaps.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
@@ -232,66 +294,6 @@ namespace UO_Atlas
             this.tabControlMaps.TabIndex = 3;
             this.tabControlMaps.SelectedIndexChanged += new System.EventHandler(this.tabControlMaps_SelectedIndexChanged);
             // 
-            // tabPageFelucca
-            // 
-            this.tabPageFelucca.Location = new System.Drawing.Point(4, 25);
-            this.tabPageFelucca.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageFelucca.Name = "tabPageFelucca";
-            this.tabPageFelucca.Size = new System.Drawing.Size(584, 0);
-            this.tabPageFelucca.TabIndex = 0;
-            this.tabPageFelucca.Text = "Felucca";
-            this.tabPageFelucca.UseVisualStyleBackColor = true;
-            // 
-            // tabPageTrammel
-            // 
-            this.tabPageTrammel.Location = new System.Drawing.Point(4, 25);
-            this.tabPageTrammel.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageTrammel.Name = "tabPageTrammel";
-            this.tabPageTrammel.Size = new System.Drawing.Size(584, 0);
-            this.tabPageTrammel.TabIndex = 1;
-            this.tabPageTrammel.Text = "Trammel";
-            this.tabPageTrammel.UseVisualStyleBackColor = true;
-            // 
-            // tabPageIlshenar
-            // 
-            this.tabPageIlshenar.Location = new System.Drawing.Point(4, 25);
-            this.tabPageIlshenar.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageIlshenar.Name = "tabPageIlshenar";
-            this.tabPageIlshenar.Size = new System.Drawing.Size(584, 0);
-            this.tabPageIlshenar.TabIndex = 2;
-            this.tabPageIlshenar.Text = "Ilshenar";
-            this.tabPageIlshenar.UseVisualStyleBackColor = true;
-            // 
-            // tabPageMalas
-            // 
-            this.tabPageMalas.Location = new System.Drawing.Point(4, 25);
-            this.tabPageMalas.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageMalas.Name = "tabPageMalas";
-            this.tabPageMalas.Size = new System.Drawing.Size(584, 0);
-            this.tabPageMalas.TabIndex = 3;
-            this.tabPageMalas.Text = "Malas";
-            this.tabPageMalas.UseVisualStyleBackColor = true;
-            // 
-            // tabPageTokuno
-            // 
-            this.tabPageTokuno.Location = new System.Drawing.Point(4, 25);
-            this.tabPageTokuno.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageTokuno.Name = "tabPageTokuno";
-            this.tabPageTokuno.Size = new System.Drawing.Size(584, 0);
-            this.tabPageTokuno.TabIndex = 4;
-            this.tabPageTokuno.Text = "Tokuno";
-            this.tabPageTokuno.UseVisualStyleBackColor = true;
-            // 
-            // tabPageTerMur
-            // 
-            this.tabPageTerMur.Location = new System.Drawing.Point(4, 25);
-            this.tabPageTerMur.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageTerMur.Name = "tabPageTerMur";
-            this.tabPageTerMur.Size = new System.Drawing.Size(584, 0);
-            this.tabPageTerMur.TabIndex = 5;
-            this.tabPageTerMur.Text = "Ter Mur";
-            this.tabPageTerMur.UseVisualStyleBackColor = true;
-            // 
             // mapViewer
             // 
             this.mapViewer.BackColor = System.Drawing.Color.Transparent;
@@ -305,6 +307,13 @@ namespace UO_Atlas
             this.mapViewer.ZoomLevel = UO_Atlas.ZoomLevel.PercentOneHundred;
             this.mapViewer.DoubleClick += new System.EventHandler(this.mapViewer_DoubleClick);
             this.mapViewer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapViewer_MouseMove);
+            // 
+            // menuImportLabels
+            // 
+            this.menuImportLabels.Name = "menuImportLabels";
+            this.menuImportLabels.Size = new System.Drawing.Size(191, 22);
+            this.menuImportLabels.Text = "Import &Labels";
+            this.menuImportLabels.Click += new System.EventHandler(this.menuImportLabels_Click);
             // 
             // MainForm
             // 
@@ -339,12 +348,6 @@ namespace UO_Atlas
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuExit;
         private System.Windows.Forms.ToolStripMenuItem menuHideControls;
-        private System.Windows.Forms.TabControl tabControlMaps;
-        private System.Windows.Forms.TabPage tabPageFelucca;
-        private System.Windows.Forms.TabPage tabPageTrammel;
-        private System.Windows.Forms.TabPage tabPageIlshenar;
-        private System.Windows.Forms.TabPage tabPageMalas;
-        private System.Windows.Forms.TabPage tabPageTokuno;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel lblZoom;
         private System.Windows.Forms.ToolStripComboBox cbZoom;
@@ -352,10 +355,17 @@ namespace UO_Atlas
         private System.Windows.Forms.ToolStripStatusLabel lblHoveredCoords;
         private System.Windows.Forms.ToolStripMenuItem menuTrackPlayer;
         private System.Windows.Forms.ToolStripButton menuAbout;
-        private System.Windows.Forms.TabPage tabPageTerMur;
         private System.Windows.Forms.ToolStripStatusLabel lblPlayerCoordsTitle;
         private System.Windows.Forms.ToolStripStatusLabel lblPlayerCoords;
         private System.Windows.Forms.ToolStripMenuItem menuStayOnTop;
+        private System.Windows.Forms.TabPage tabPageTerMur;
+        private System.Windows.Forms.TabPage tabPageTokuno;
+        private System.Windows.Forms.TabPage tabPageMalas;
+        private System.Windows.Forms.TabPage tabPageIlshenar;
+        private System.Windows.Forms.TabPage tabPageTrammel;
+        private System.Windows.Forms.TabPage tabPageFelucca;
+        private System.Windows.Forms.TabControl tabControlMaps;
+        private System.Windows.Forms.ToolStripMenuItem menuImportLabels;
     }
 }
 

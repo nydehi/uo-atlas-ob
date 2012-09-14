@@ -22,3 +22,6 @@ C:\Users\JWilliams\Documents\Visual Studio 2010\Projects\uo-atlas-ob\UO Atlas\ob
 C:\Users\JWilliams\Documents\Visual Studio 2010\Projects\uo-atlas-ob\UO Atlas\obj\Release\UO_Atlas.Properties.Resources.resources
 C:\Users\JWilliams\Documents\Visual Studio 2010\Projects\uo-atlas-ob\UO Atlas\obj\Release\ResGen.read.1.tlog
 C:\Users\JWilliams\Documents\Visual Studio 2010\Projects\uo-atlas-ob\UO Atlas\obj\Release\ResGen.write.1.tlog
+C:\Users\JWilliams\Documents\Visual Studio 2010\Projects\uo-atlas-ob\UO Atlas\bin\Release\icons.bmp
+C:\Users\JWilliams\Documents\Visual Studio 2010\Projects\uo-atlas-ob\UO Atlas\bin\Release\icons.txt
+C:\Users\JWilliams\Documents\Visual Studio 2010\Projects\uo-atlas-ob\UO Atlas\bin\Release\License.txt
