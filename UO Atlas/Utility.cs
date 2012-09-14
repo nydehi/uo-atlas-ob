@@ -23,7 +23,33 @@ namespace UO_Atlas
         public static void EnsureDirectory(string path)
         {
             if (!Directory.Exists(path))
+            {
                 Directory.CreateDirectory(path);
+            }
+        }
+
+
+
+        public static void DeleteDirectory(DirectoryInfo directory)
+        {
+            if (!directory.Exists)
+            {
+                return;
+            }
+
+            DirectoryInfo[] directories = directory.GetDirectories();
+            foreach(DirectoryInfo subDirectory in directories)
+            {
+                DeleteDirectory(subDirectory);
+            }
+
+            FileInfo[] files = directory.GetFiles();
+            foreach(FileInfo f in files)
+            {
+                f.Delete();
+            }
+
+            directory.Delete();
         }
     }
 }

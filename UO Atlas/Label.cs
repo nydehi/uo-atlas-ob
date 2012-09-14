@@ -26,7 +26,7 @@ namespace UO_Atlas
             {
                 return null;
             }
-            string categoryString = currentLine.Substring(0, categoryEndIndex);
+            string categoryString = currentLine.Substring(1, categoryEndIndex - 1);
 
             LabelCategory category;
             LabelCategory.Cache.TryGetValue(categoryString.ToUpper(), out category);

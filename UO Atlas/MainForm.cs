@@ -77,12 +77,12 @@ namespace UO_Atlas
 
             m_LastKnownLocation = location;
 
-            if (mapViewer.Map != location.Facet)
-            {
-                mapViewer.Map = location.Facet;
-            }
+            //if (mapViewer.Map != location.Facet)
+            //{
+            //    mapViewer.Map = location.Facet;
+            //}
 
-            mapViewer.SetLocation(location.X, location.Y);
+            //mapViewer.SetLocation(location.X, location.Y);
 
             lblPlayerCoords.Text = string.Concat('(', location.X, ',', location.Y, ')');
         }
@@ -157,25 +157,28 @@ namespace UO_Atlas
         {
             LabelCategory.LoadCache();
 
-            mapViewer.OnMapChanged += new EventHandler<MapViewerEventArgs>(OnMapChanged);
-            mapViewer.OnZoomLevelChanged += new EventHandler<MapViewerEventArgs>(OnZoomLevelChanged);
-            mapViewer.OnError += new ErrorEventHandler(OnError);
+            //mapViewer.OnMapChanged += OnMapChanged;
+            //mapViewer.OnZoomLevelChanged += OnZoomLevelChanged;
+            //mapViewer.OnError += OnError;
 
-            mapViewer.Map =  Map.Get(MapName.Felucca);
-            cbZoom.SelectedIndex = (int)ZoomLevel.PercentOneHundred;
+            //mapViewer.Map = Map.Get(MapName.Felucca);
+            cbZoom.SelectedIndex = (int) ZoomLevel.PercentOneHundred;
 
-            menuTrackPlayer.Checked = true;
+            //menuTrackPlayer.Checked = true;
         }
+
 
         private void OnMapChanged(object sender, MapViewerEventArgs e)
         {
             tabControlMaps.SelectedIndex = e.Map.Index;
         }
 
+
         private void OnZoomLevelChanged(object sender, MapViewerEventArgs e)
         {
-           cbZoom.SelectedIndex = (int)mapViewer.ZoomLevel ;
+           //cbZoom.SelectedIndex = (int)mapViewer.ZoomLevel;
         }
+
 
         private void OnError(object sender, string ErrorMessage)
         {
@@ -186,18 +189,18 @@ namespace UO_Atlas
         {
             if (e.Delta < 0)
             {
-                mapViewer.Zoom(-1);
+                //mapViewer.Zoom(-1);
             }
             else if (e.Delta > 0)
             {
-                mapViewer.Zoom(1);
+                //mapViewer.Zoom(1);
             }
         }
 
         private void mapViewer_MouseMove(object sender, MouseEventArgs e)
         {
             // Show the hovered coordinates in the statusbar
-            lblHoveredCoords.Text = string.Concat('(', mapViewer.HoveredLocation.X, ',', mapViewer.HoveredLocation.Y, ')');
+            //lblHoveredCoords.Text = string.Concat('(', mapViewer.HoveredLocation.X, ',', mapViewer.HoveredLocation.Y, ')');
         }
 
         private void menuTrackPlayer_CheckedChanged(object sender, EventArgs e)
@@ -221,11 +224,14 @@ namespace UO_Atlas
 
         private void menuSettings_Click(object sender, EventArgs e)
         {
-            Point location = mapViewer.PaintLocation;
-            mapViewer.Dispose();
-            mapViewer = null;
-            MapImageGenerator.Start();
-            Application.Restart();
+            //mapViewer.Dispose();
+            //mapViewer = null;
+
+            MapImageGenerator generator = new MapImageGenerator();
+            generator.Start();
+
+            //Initialize();
+            //Application.Restart();
         }
 
         private void menuExit_Click(object sender, EventArgs e)
@@ -241,12 +247,12 @@ namespace UO_Atlas
 
         private void tabControlMaps_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mapViewer.Map = Map.Get((MapName)tabControlMaps.SelectedIndex);
+            //mapViewer.Map = Map.Get((MapName)tabControlMaps.SelectedIndex);
         }
 
         private void cbZoom_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mapViewer.ZoomLevel = (ZoomLevel)cbZoom.SelectedIndex;
+            //mapViewer.ZoomLevel = (ZoomLevel)cbZoom.SelectedIndex;
         }
 
         private void mapViewer_DoubleClick(object sender, EventArgs e)
@@ -291,7 +297,7 @@ namespace UO_Atlas
                         label = Label.LoadFrom(reader);
                         if (label != null)
                         {
-                            System.Diagnostics.Debug.WriteLine(label.Category.Name + ": " + label.Text);
+                            Console.WriteLine(label.Category.Name + ": " + label.Text);
                         }
                     } while (label != null);
                     

@@ -9,13 +9,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
 using System.IO;
+
 
 namespace UO_Atlas
 {
@@ -343,10 +341,41 @@ namespace UO_Atlas
             if (m_MapImage != null)
                 m_MapImage.Dispose();
 
-            string MapImagePath = Path.Combine(Atlas.MapImagesFolder, String.Format(m_ZoomInfos[m_ZoomLevel].FileName, m_Map.Index));
+            string mapImagePath = Path.Combine(Atlas.MapImagesFolder, String.Format(m_ZoomInfos[m_ZoomLevel].FileName, m_Map.Index));
 
-            if (File.Exists(MapImagePath))
-                m_MapImage = Image.FromFile(MapImagePath);
+            if (File.Exists(mapImagePath))
+            {
+                Rectangle imageBounds;
+                PixelFormat pixelFormat;
+                int totalBytesUsedByEitherImage;
+                byte[] fromFileImageBytes;
+
+                using(Bitmap fromFileImage = new Bitmap(mapImagePath))
+                {
+                    imageBounds = new Rectangle(0, 0, fromFileImage.Width, fromFileImage.Height);
+                    pixelFormat = fromFileImage.PixelFormat;
+                    System.Drawing.Imaging.BitmapData fromFileImageData = fromFileImage.LockBits(imageBounds, System.Drawing.Imaging.ImageLockMode.ReadOnly, pixelFormat);
+
+                    totalBytesUsedByEitherImage = Math.Abs(fromFileImageData.Stride) * imageBounds.Height;
+
+                    fromFileImageBytes = new byte[totalBytesUsedByEitherImage];
+                    System.Runtime.InteropServices.Marshal.Copy(fromFileImageData.Scan0, fromFileImageBytes, 0, totalBytesUsedByEitherImage);
+
+                    fromFileImage.UnlockBits(fromFileImageData);
+                    fromFileImage.Dispose();
+                }
+
+
+                Bitmap inMemoryImage = new Bitmap(imageBounds.Width, imageBounds.Height, pixelFormat);
+                System.Drawing.Imaging.BitmapData inMemoryImageData = inMemoryImage.LockBits(imageBounds, System.Drawing.Imaging.ImageLockMode.WriteOnly, pixelFormat);
+                System.Runtime.InteropServices.Marshal.Copy(fromFileImageBytes, 0, inMemoryImageData.Scan0, totalBytesUsedByEitherImage);
+                inMemoryImage.UnlockBits(inMemoryImageData);
+
+                fromFileImageBytes = null;
+                
+
+                m_MapImage = inMemoryImage;
+            }
             else
             {
                 if (OnError != null)
@@ -361,23 +390,23 @@ namespace UO_Atlas
                 case ZoomLevel.PercentOneSixteenth:
                     return "1/16x";
                 case ZoomLevel.PercentOneEighth:
-                    return " 1/8x";
+                    return "1/8x";
                 case ZoomLevel.PercentOneQuarter:
-                    return " 1/4x";
+                    return "1/4x";
                 case ZoomLevel.PercentOneHalf:
-                    return " 1/2x";
+                    return "1/2x";
                 case ZoomLevel.PercentOneHundred:
-                    return "   1x";
+                    return "1x";
                 case ZoomLevel.PercentTwoHundred:
-                    return "   2x";
+                    return "2x";
                 case ZoomLevel.PercentFourHundred:
-                    return "   4x";
+                    return "4x";
                 case ZoomLevel.PercentEightHundred:
-                    return "   8x";
+                    return "8x";
                 case ZoomLevel.PercentSixteenHundred:
-                    return "  16x";
+                    return "16x";
                 default:
-                    return "   1x";
+                    return "1x";
             }
         }
 
