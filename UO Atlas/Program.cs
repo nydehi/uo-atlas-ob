@@ -109,7 +109,7 @@ namespace UO_Atlas
                 File.Move(Path.Combine(extractionPath, file), destinationPath);
             }
 
-            Utility.DeleteDirectory(extractionPath);
+            Utility.DeleteDirectory(new DirectoryInfo(extractionPath));
         }
     }
 }
