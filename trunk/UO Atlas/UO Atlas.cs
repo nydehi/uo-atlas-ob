@@ -9,25 +9,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Windows.Forms;
 using System.IO;
+using FirebirdSql.Data.FirebirdClient;
+using UO_Atlas.Properties;
 
 namespace UO_Atlas
 {
     public delegate void ErrorEventHandler(object sender, string message);
 
+
+
     public static class Atlas
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
-        }
 
         /// <summary>
         /// Gets the location of the UO Atlas application data folder
@@ -41,6 +36,8 @@ namespace UO_Atlas
                 return folder;
             }
         }
+        
+
 
         /// <summary>
         /// Gets the location of the folder where the map images are stored
@@ -52,6 +49,71 @@ namespace UO_Atlas
                 string folder = Path.Combine(ApplicationDataFolder, "Maps");
                 Utility.EnsureDirectory(folder);
                 return folder;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Gets the location of the folder where the map images are stored
+        /// </summary>
+        public static string MapLabelsFolder
+        {
+            get
+            {
+                string folder = Path.Combine(ApplicationDataFolder, "Labels");
+                Utility.EnsureDirectory(folder);
+                return folder;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Gets the connection string for database containing the map labels.
+        /// </summary>
+        public static string MapLabelsDatabaseConnectionString
+        {
+            get
+            {
+                string dbPath = Path.Combine(Atlas.MapLabelsFolder, "database.fdb");
+
+                
+
+                        //using(MemoryStream ms = new MemoryStream(Resources.FireBirdFiles))
+                        //{
+
+
+                            //DeflateStream zipStream = new DeflateStream(ms, CompressionMode.Decompress);
+
+                            //int bytesRead;
+                            //do
+                            //{
+                            //    bytesRead = zipStream.Read(
+                            //}
+
+                            //byte[] decompressedBuffer = new byte[streamData.Length + 100];
+                            //// Use the ReadAllBytesFromStream to read the stream.
+                            //int totalCount = DeflateTest.ReadAllBytesFromStream(zipStream, decompressedBuffer);
+                            //Console.WriteLine("Decompressed {0} bytes", totalCount);
+                        //}
+                //}
+                
+
+                FbConnectionStringBuilder connectionStringBuilder = new FbConnectionStringBuilder();
+                connectionStringBuilder.Database = dbPath;
+                connectionStringBuilder.UserID = "Trox";
+                connectionStringBuilder.Password = "Oblivion Reloaded";
+                connectionStringBuilder.ServerType = FbServerType.Embedded;
+
+                string connectionString = connectionStringBuilder.ToString();
+
+                if(!File.Exists(dbPath))
+                {
+                    FbConnection.CreateDatabase(connectionString);
+                }
+
+                return connectionString;
             }
         }
     }

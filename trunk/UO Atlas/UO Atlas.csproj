@@ -52,6 +52,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FirebirdSql.Data.FirebirdClient">
+      <HintPath>FireBird\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -60,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Action.cs" />
     <Compile Include="Controls\MapViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -72,11 +77,12 @@
     <Compile Include="Dialogs\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\MapImageGenerationDialog.cs">
+    <Compile Include="IStatusProvider.cs" />
+    <Compile Include="Dialogs\ProcessRunningDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\MapImageGenerationDialog.Designer.cs">
-      <DependentUpon>MapImageGenerationDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\ProcessRunningDialog.Designer.cs">
+      <DependentUpon>ProcessRunningDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Label.cs" />
     <Compile Include="MapImageGenerator.cs" />
@@ -88,6 +94,7 @@
     </Compile>
     <Compile Include="Map.cs" />
     <Compile Include="PlayerLocation.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="UltimaSDK\Animations.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -171,10 +178,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\MapImageGenerationDialog.resx">
-      <DependentUpon>MapImageGenerationDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -199,20 +202,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utility.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Resources\FireBird.zip" />
+    <None Include="Resources\FireBirdFiles.zip" />
     <None Include="Resources\info_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icons.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="icons.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="License.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="License.txt" />
+    <None Include="Resources\Interop.Shell32.dll" />
+    <None Include="Resources\icons.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -230,6 +227,18 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>False</Private>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

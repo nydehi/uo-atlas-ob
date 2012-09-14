@@ -17,25 +17,31 @@ using System.ComponentModel;
 using System.Threading;
 using System.Drawing.Imaging;
 
+
 namespace UO_Atlas
 {
-    public static class MapImageGenerator
+    public class MapImageGenerator : IStatusProvider
     {
-        private static Dialogs.MapImageGenerationDialog MapImageGenerationDialog = new Dialogs.MapImageGenerationDialog();
-        private static Thread calcThread;
+        private Dialogs.ProgressRunningDialog _ProcessDialog;
+        private Thread m_WorkerThread;
 
-        public static event OnImageUpdateHandler OnImageUpdate;
-        public delegate void OnImageUpdateHandler(int PercentOfProgress, string StatusMessage);
+        public event StatusChangedEventHandler StatusChanged;
+        
 
-        public static void Start()
+
+        public void Start()
         {
-            calcThread = new Thread(new ThreadStart(Calculate));
-            calcThread.Start();
+            _ProcessDialog = new Dialogs.ProgressRunningDialog(this, Abort);
 
-            MapImageGenerationDialog.ShowDialog();
+            m_WorkerThread = new Thread(Calculate);
+            m_WorkerThread.Start();
+
+            _ProcessDialog.ShowDialog();
         }
 
-        public static void Calculate()
+
+
+        private void Calculate()
         {
             string savePath = Path.Combine(Atlas.MapImagesFolder, "map{0}-{1}.png");
 
@@ -52,70 +58,47 @@ namespace UO_Atlas
 
                 Image mapImage = currentMap.ToImage(true);
 
-                //// Zoom 50%
-                //Image mapImage_resized = new Bitmap(mapImage, new Size(currentMap.Width / 16, currentMap.Height / 16));
-                //mapImage_resized.Save(String.Format(savePath, mapIndex, "50%"), ImageFormat.Png);
-                //mapImage_resized.Dispose();
-
-                //// Zoom 100%
-                //mapImage_resized = new Bitmap(mapImage, new Size(currentMap.Width / 8, currentMap.Height / 8));
-                //mapImage_resized.Save(String.Format(savePath, mapIndex, "100%"), ImageFormat.Png);
-                //mapImage_resized.Dispose();
-
-                //// Zoom 200%
-                //mapImage_resized = new Bitmap(mapImage, new Size(currentMap.Width / 4, currentMap.Height / 4));
-                //mapImage_resized.Save(String.Format(savePath, mapIndex, "200%"), ImageFormat.Png);
-                //mapImage_resized.Dispose();
-
-                //// Zoom 400%
-                //mapImage_resized = new Bitmap(mapImage, new Size(currentMap.Width / 2, currentMap.Height / 2));
-                //mapImage_resized.Save(String.Format(savePath, mapIndex, "400%"), ImageFormat.Png);
-                //mapImage_resized.Dispose();
-
-                //// Zoom 800%
-                //mapImage.Save(String.Format(savePath, mapIndex, "800%"), ImageFormat.Png);
-                //mapImage.Dispose();
-
                 // Zoom 1/16
-                Image mapImage_resized = new Bitmap(mapImage, new Size(currentMap.Width / 16, currentMap.Height / 16));
-                mapImage_resized.Save(String.Format(savePath, mapIndex, "6.25%"), ImageFormat.Png);
-                mapImage_resized.Dispose();
+                Image mapImageResized = new Bitmap(mapImage, new Size(currentMap.Width / 16, currentMap.Height / 16));
+                mapImageResized.Save(String.Format(savePath, mapIndex, "6.25%"), ImageFormat.Png);
+                mapImageResized.Dispose();
 
                 // Zoom 1/8
-                mapImage_resized = new Bitmap(mapImage, new Size(currentMap.Width / 8, currentMap.Height / 8));
-                mapImage_resized.Save(String.Format(savePath, mapIndex, "12.5%"), ImageFormat.Png);
-                mapImage_resized.Dispose();
+                mapImageResized = new Bitmap(mapImage, new Size(currentMap.Width / 8, currentMap.Height / 8));
+                mapImageResized.Save(String.Format(savePath, mapIndex, "12.5%"), ImageFormat.Png);
+                mapImageResized.Dispose();
 
                 // Zoom 1/4
-                mapImage_resized = new Bitmap(mapImage, new Size(currentMap.Width / 4, currentMap.Height / 4));
-                mapImage_resized.Save(String.Format(savePath, mapIndex, "25%"), ImageFormat.Png);
-                mapImage_resized.Dispose();
+                mapImageResized = new Bitmap(mapImage, new Size(currentMap.Width / 4, currentMap.Height / 4));
+                mapImageResized.Save(String.Format(savePath, mapIndex, "25%"), ImageFormat.Png);
+                mapImageResized.Dispose();
 
                 // Zoom 1/2
-                mapImage_resized = new Bitmap(mapImage, new Size(currentMap.Width / 2, currentMap.Height / 2));
-                mapImage_resized.Save(String.Format(savePath, mapIndex, "50%"), ImageFormat.Png);
-                mapImage_resized.Dispose();
+                mapImageResized = new Bitmap(mapImage, new Size(currentMap.Width / 2, currentMap.Height / 2));
+                mapImageResized.Save(String.Format(savePath, mapIndex, "50%"), ImageFormat.Png);
+                mapImageResized.Dispose();
 
                 // Zoom 100%
                 mapImage.Save(String.Format(savePath, mapIndex, "100%"), ImageFormat.Png);
                 mapImage.Dispose();
 
                 GC.Collect();
-                GC.WaitForPendingFinalizers();
+                // GC.WaitForPendingFinalizers();
             }
             
             ReportProgress(100, "Image Update completed");
         }
 
-        private static void ReportProgress(int PercentOfProgress, string status)
+
+        private void ReportProgress(int percentOfProgress, string status)
         {
-            if (OnImageUpdate != null)
-                OnImageUpdate(PercentOfProgress, status);
+            StatusChanged(percentOfProgress, status);
         }
 
-        public static void Abort()
+
+        public void Abort()
         {
-            calcThread.Abort();
+            m_WorkerThread.Abort();
         }
     }
 }

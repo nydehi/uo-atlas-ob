@@ -60,10 +60,89 @@ namespace UO_Atlas.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap info_16 {
+        internal static byte[] FireBirdFiles {
             get {
-                object obj = ResourceManager.GetObject("info_16", resourceCulture);
+                object obj = ResourceManager.GetObject("FireBirdFiles", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap InformationIcon {
+            get {
+                object obj = ResourceManager.GetObject("InformationIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap LabelCategoryIcons {
+            get {
+                object obj = ResourceManager.GetObject("LabelCategoryIcons", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ARCHERSGUILD
+        ///ARMAMENTSGUILD
+        ///ARMOURERSGUILD
+        ///ARMS
+        ///ASSASINSGUILD
+        ///BAKER
+        ///BANK
+        ///BARBERSHOP
+        ///BARD
+        ///BARDICGUILD
+        ///BEEKEEPER
+        ///BLACKSMITH
+        ///BLACKSMITHSGUILD
+        ///BODYOFWATER
+        ///BOWYER
+        ///BRASS
+        ///BRIDGE
+        ///BUTCHER
+        ///CARPENTER
+        ///CASTLE
+        ///CAVALRYGUILD
+        ///COOKSGUILD
+        ///CUSTOMS
+        ///DOCKS
+        ///DUNGEON
+        ///EXIT
+        ///FIGHTERSGUILD
+        ///FISHERMANSGUILD
+        ///FLETCHER
+        ///GATE
+        ///GEM
+        ///GRAVEYARD
+        ///GUILD
+        ///HAND
+        ///HEALER
+        ///HEALERSGUILD
+        ///ILLUSIONISTSGUILD
+        ///INN
+        ///POINTOFINTEREST
+        ///ISLAND
+        ///JEWELER
+        ///KEEP
+        ///LANDMARK
+        ///LARGEHOUSE
+        ///LGBOATE
+        ///LGBOATN
+        ///LGBOATS
+        ///LGBOATW
+        ///LIBRARY
+        ///LOGCABIN        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string MapLabelCategories {
+            get {
+                return ResourceManager.GetString("MapLabelCategories", resourceCulture);
+            }
+        }
+        
+        internal static byte[] Shell32 {
+            get {
+                object obj = ResourceManager.GetObject("Shell32", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }
