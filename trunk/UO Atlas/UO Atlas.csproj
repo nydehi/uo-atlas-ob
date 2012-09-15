@@ -53,7 +53,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FirebirdSql.Data.FirebirdClient">
-      <HintPath>FireBird\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+      <HintPath>Resources\FirebirdSql.Data.FirebirdClient.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -93,6 +93,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Map.cs" />
+    <Compile Include="MapLabelImporter.cs" />
     <Compile Include="PlayerLocation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="UltimaSDK\Animations.cs">
@@ -202,12 +203,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utility.cs" />
-    <None Include="Resources\FireBird.zip" />
     <None Include="Resources\FireBirdFiles.zip" />
     <None Include="Resources\info_16.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="License.txt" />
+    <None Include="Resources\FirebirdSql.Data.FirebirdClient.dll" />
+    <None Include="Resources\Icons.png" />
     <None Include="Resources\Interop.Shell32.dll" />
     <None Include="Resources\icons.txt" />
   </ItemGroup>

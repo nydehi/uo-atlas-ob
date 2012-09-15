@@ -8,19 +8,15 @@
  ***************************************************************************/
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading;
+
 
 
 namespace UO_Atlas.Dialogs
 {
     public partial class ProgressRunningDialog : Form
     {
+        private IStatusProvider _StatusProvider;
         private Action _CancelProcessAction;
 
 
@@ -34,6 +30,7 @@ namespace UO_Atlas.Dialogs
 
         public ProgressRunningDialog(IStatusProvider statusProvider, Action cancelProcessAction)        {
             statusProvider.StatusChanged += ProgressReported;
+            _StatusProvider = statusProvider;
             _CancelProcessAction = cancelProcessAction;
 
             InitializeComponent();
@@ -48,7 +45,7 @@ namespace UO_Atlas.Dialogs
         {
             if(InvokeRequired)
             {
-                BeginInvoke(new MethodInvoker(delegate() { ProgressReported(percentOfProgress, status); }));
+                BeginInvoke(new MethodInvoker(delegate { ProgressReported(percentOfProgress, status); }));
                 return;
             }
 
@@ -79,6 +76,32 @@ namespace UO_Atlas.Dialogs
         private void btDone_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if(components != null)
+                {
+                    components.Dispose();
+                }
+
+                _CancelProcessAction = null;
+
+                if(_StatusProvider != null)
+                {
+                    _StatusProvider.StatusChanged -= ProgressReported;
+                    _StatusProvider = null;
+                }
+            }
+            base.Dispose(disposing);
         }
     }
 }

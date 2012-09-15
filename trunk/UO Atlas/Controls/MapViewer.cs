@@ -46,8 +46,10 @@ namespace UO_Atlas
         /// <summary>
         /// Creates a new ZoomLevel
         /// </summary>
+        /// <param name="fileName"></param>
         /// <param name="realZoom">the zoom in relation to the map size</param>
         /// <param name="drawZoom">the zoom in relation to the map-image</param>
+        /// <param name="zoomLevel"></param>
         public ZoomInfo(ZoomLevel zoomLevel, string fileName, float realZoom, int drawZoom)
         {
             m_ZoomLevel = zoomLevel;
@@ -94,8 +96,7 @@ namespace UO_Atlas
             InitializeComponent();
 
             // Set the value of the double-buffering style bits to true.
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.ResizeRedraw |
-              ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.ResizeRedraw | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
         }
 
         private void SetZoomInfo()
@@ -115,7 +116,7 @@ namespace UO_Atlas
         private Map m_Map;
         private Image m_MapImage;
         private Size m_CanvasSize = new Size(0, 0);
-        private Dictionary<ZoomLevel, ZoomInfo> m_ZoomInfos = new Dictionary<ZoomLevel, ZoomInfo>();
+        private readonly Dictionary<ZoomLevel, ZoomInfo> m_ZoomInfos = new Dictionary<ZoomLevel, ZoomInfo>();
         private ZoomLevel m_ZoomLevel = ZoomLevel.MinimumZoom;
         private Point m_PaintLocation = new Point(0, 0);
         private Point m_CenterLocation = new Point(0, 0);
@@ -140,13 +141,15 @@ namespace UO_Atlas
                 {
                     ReloadMapImage();
 
-                    setScrollbarValues();
+                    SetScrollbarValues();
                     OnMapLocationChanged();
                     Invalidate();
                 }
 
                 if (OnMapChanged != null)
-                    OnMapChanged(this, new MapViewerEventArgs(this.Map, this.CenterLocation, this.ZoomLevel));
+                {
+                    OnMapChanged(this, new MapViewerEventArgs(Map, CenterLocation, ZoomLevel));
+                }
             }
         }
 
@@ -174,12 +177,12 @@ namespace UO_Atlas
                 if (m_Map != null)
                 {
                     ReloadMapImage();
-                    setScrollbarValues();
+                    SetScrollbarValues();
                     SetLocation(m_CenterLocation);
                 }
 
                 if (OnZoomLevelChanged != null)
-                    OnZoomLevelChanged(this, new MapViewerEventArgs(this.Map, this.CenterLocation, this.ZoomLevel));
+                    OnZoomLevelChanged(this, new MapViewerEventArgs(Map, CenterLocation, ZoomLevel));
             }
         }
 
@@ -234,16 +237,16 @@ namespace UO_Atlas
         protected override void OnResize(EventArgs e)
         {
             // Recalculate canvas size
-            m_CanvasSize.Width = this.Width - vScrollBar.Width;
-            m_CanvasSize.Height = this.Height - hScrollBar.Height;
+            m_CanvasSize.Width = Width - vScrollBar.Width;
+            m_CanvasSize.Height = Height - hScrollBar.Height;
 
             // Readjust scrollbars
-            hScrollBar.Width = this.Width;
+            hScrollBar.Width = Width;
             vScrollBar.Height = m_CanvasSize.Height;
             hScrollBar.Top = m_CanvasSize.Height;
             vScrollBar.Left = m_CanvasSize.Width;
 
-            setScrollbarValues();
+            SetScrollbarValues();
             base.OnResize(e);
         }
 
@@ -256,17 +259,16 @@ namespace UO_Atlas
             {
                 try
                 {
-
                     // if the image fits into canvas completely
                     if (m_CanvasSize.Width > m_MapImage.Width && m_CanvasSize.Height > m_MapImage.Height)
                     {
-                        int x = 0, y = 0;
+                        int x = 0;
 
                         Graphics g = e.Graphics;
 
                         while (x < m_CanvasSize.Width)
                         {
-                            y = 0;
+                            int y = 0;
 
                             while (y < m_CanvasSize.Height)
                             {
@@ -276,35 +278,32 @@ namespace UO_Atlas
 
                             x += m_MapImage.Width;
                         }
-
                     }
                     // if the image fits NOT into canvas, show a part
                     else
                     {
-                        Rectangle sourceRect, destRect;
-
                         // the coordinates of the top-left corner of the map-image
-                        int X = (int) (m_PaintLocation.X * RealZoom / ImageZoom);
-                        int Y = (int) (m_PaintLocation.Y * RealZoom / ImageZoom);
+                        int x = (int) (m_PaintLocation.X * RealZoom / ImageZoom);
+                        int y = (int) (m_PaintLocation.Y * RealZoom / ImageZoom);
 
                         // width and length of the visible map-rectangle
-                        int Width = (int) (m_CanvasSize.Width / ImageZoom);
-                        int Height = (int) (m_CanvasSize.Height / ImageZoom);
+                        int width = (m_CanvasSize.Width / ImageZoom);
+                        int height = (m_CanvasSize.Height / ImageZoom);
 
-                        sourceRect = new Rectangle(X, Y, Width, Height); // which part of the image will be painted?
-                        destRect = new Rectangle(0, 0, m_CanvasSize.Width, m_CanvasSize.Height); // paint into the canvas
+                        Rectangle sourceRect = new Rectangle(x, y, width, height);
+                        Rectangle destRect = new Rectangle(0, 0, m_CanvasSize.Width, m_CanvasSize.Height);
 
                         Graphics g = e.Graphics;
                         g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
 
                         // Calculate whether the source-retangle reaches the border of the map
-                        int rightBorder = (int) (X + Width - m_Map.Width * RealZoom / ImageZoom);
-                        int bottomBorder = (int) (Y + Height - m_Map.Height * RealZoom / ImageZoom);
+                        int rightBorder = (int)(x + width - m_Map.Width * RealZoom / ImageZoom);
+                        int bottomBorder = (int)(y + height - m_Map.Height * RealZoom / ImageZoom);
 
                         // the sourceRectangle reaches over the right border of the map
                         if (rightBorder >= 0)
                         {
-                            sourceRect = new Rectangle(0, Y, rightBorder, m_CanvasSize.Height * ImageZoom);
+                            sourceRect = new Rectangle(0, y, rightBorder, m_CanvasSize.Height * ImageZoom);
                             destRect = new Rectangle(m_CanvasSize.Width - rightBorder, 0, rightBorder, m_CanvasSize.Height);
 
                             g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
@@ -313,7 +312,7 @@ namespace UO_Atlas
                         // the sourceRectangle reaches over the bottom border of the map
                         if (bottomBorder >= 0)
                         {
-                            sourceRect = new Rectangle(X, 0, m_CanvasSize.Width * ImageZoom, bottomBorder);
+                            sourceRect = new Rectangle(x, 0, m_CanvasSize.Width * ImageZoom, bottomBorder);
                             destRect = new Rectangle(0, m_CanvasSize.Height - bottomBorder, m_CanvasSize.Width, bottomBorder);
 
                             g.DrawImage(m_MapImage, destRect, sourceRect, GraphicsUnit.Pixel);
@@ -354,7 +353,7 @@ namespace UO_Atlas
                 {
                     imageBounds = new Rectangle(0, 0, fromFileImage.Width, fromFileImage.Height);
                     pixelFormat = fromFileImage.PixelFormat;
-                    System.Drawing.Imaging.BitmapData fromFileImageData = fromFileImage.LockBits(imageBounds, System.Drawing.Imaging.ImageLockMode.ReadOnly, pixelFormat);
+                    BitmapData fromFileImageData = fromFileImage.LockBits(imageBounds, ImageLockMode.ReadOnly, pixelFormat);
 
                     totalBytesUsedByEitherImage = Math.Abs(fromFileImageData.Stride) * imageBounds.Height;
 
@@ -367,11 +366,11 @@ namespace UO_Atlas
 
 
                 Bitmap inMemoryImage = new Bitmap(imageBounds.Width, imageBounds.Height, pixelFormat);
-                System.Drawing.Imaging.BitmapData inMemoryImageData = inMemoryImage.LockBits(imageBounds, System.Drawing.Imaging.ImageLockMode.WriteOnly, pixelFormat);
+                BitmapData inMemoryImageData = inMemoryImage.LockBits(imageBounds, ImageLockMode.WriteOnly, pixelFormat);
                 System.Runtime.InteropServices.Marshal.Copy(fromFileImageBytes, 0, inMemoryImageData.Scan0, totalBytesUsedByEitherImage);
                 inMemoryImage.UnlockBits(inMemoryImageData);
 
-                fromFileImageBytes = null;
+                GC.Collect();
                 
 
                 m_MapImage = inMemoryImage;
@@ -383,34 +382,9 @@ namespace UO_Atlas
             }
         }
 
-        private string ZoomLevelToString()
-        {
-            switch (m_ZoomLevel)
-            {
-                case ZoomLevel.PercentOneSixteenth:
-                    return "1/16x";
-                case ZoomLevel.PercentOneEighth:
-                    return "1/8x";
-                case ZoomLevel.PercentOneQuarter:
-                    return "1/4x";
-                case ZoomLevel.PercentOneHalf:
-                    return "1/2x";
-                case ZoomLevel.PercentOneHundred:
-                    return "1x";
-                case ZoomLevel.PercentTwoHundred:
-                    return "2x";
-                case ZoomLevel.PercentFourHundred:
-                    return "4x";
-                case ZoomLevel.PercentEightHundred:
-                    return "8x";
-                case ZoomLevel.PercentSixteenHundred:
-                    return "16x";
-                default:
-                    return "1x";
-            }
-        }
+        
 
-        private void setScrollbarValues()
+        private void SetScrollbarValues()
         {
             if (m_Map != null)
             {
@@ -456,7 +430,9 @@ namespace UO_Atlas
             OnMapLocationChanged();
 
             if (OnCoordinatesChanged != null)
-                OnCoordinatesChanged(this, new MapViewerEventArgs(this.Map, this.CenterLocation, this.ZoomLevel));
+            {
+                OnCoordinatesChanged(this, new MapViewerEventArgs(Map, CenterLocation, ZoomLevel));
+            }
         }
 
         /// <summary>
@@ -476,7 +452,7 @@ namespace UO_Atlas
             vScrollBar.Invalidate();
             m_ScroolbarUpdate = false;
 
-            this.Invalidate();
+            Invalidate();
         }
 
         private void MapViewer_MouseMove(object sender, MouseEventArgs e)
@@ -508,7 +484,7 @@ namespace UO_Atlas
             // Memory the currently hovered coordinates
             if (e.Button == MouseButtons.Left)
             {
-                this.Cursor = Cursors.Hand;
+                Cursor = Cursors.Hand;
 
                 m_GrabbedLocation.X = m_HoveredLocation.X;
                 m_GrabbedLocation.Y = m_HoveredLocation.Y;
@@ -517,13 +493,15 @@ namespace UO_Atlas
 
         private void MapViewer_MouseUp(object sender, MouseEventArgs e)
         {
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void ScrollBar_ValueChanged(object sender, EventArgs e)
         {
             if (!m_ScroolbarUpdate)
+            {
                 SetLocation(hScrollBar.Value, vScrollBar.Value);
+            }
         }
     }
 

@@ -53,8 +53,10 @@ namespace UO_Atlas
             this.tabPageTrammel = new System.Windows.Forms.TabPage();
             this.tabPageFelucca = new System.Windows.Forms.TabPage();
             this.tabControlMaps = new System.Windows.Forms.TabControl();
-            //this.mapViewer = new UO_Atlas.MapViewer();
-            this.menuImportLabels = new System.Windows.Forms.ToolStripMenuItem();
+            this.mapViewer = new UO_Atlas.MapViewer();
+            this.menuLabels = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuLabelsImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuLabelsClearAll = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.tabControlMaps.SuspendLayout();
@@ -83,7 +85,7 @@ namespace UO_Atlas
             this.menuTrackPlayer,
             this.menuStayOnTop,
             this.menuHideControls,
-            this.menuImportLabels,
+            this.menuLabels,
             this.menuSettings,
             this.toolStripSeparator1,
             this.menuExit});
@@ -295,31 +297,47 @@ namespace UO_Atlas
             // 
             // mapViewer
             // 
-            //this.mapViewer.BackColor = System.Drawing.Color.Transparent;
-            //this.mapViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            //this.mapViewer.Location = new System.Drawing.Point(0, 45);
-            //this.mapViewer.Map = null;
-            //this.mapViewer.Margin = new System.Windows.Forms.Padding(0);
-            //this.mapViewer.Name = "mapViewer";
-            //this.mapViewer.Size = new System.Drawing.Size(592, 399);
-            //this.mapViewer.TabIndex = 1;
-            //this.mapViewer.ZoomLevel = UO_Atlas.ZoomLevel.PercentOneHundred;
-            //this.mapViewer.DoubleClick += new System.EventHandler(this.mapViewer_DoubleClick);
-            //this.mapViewer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapViewer_MouseMove);
+            this.mapViewer.BackColor = System.Drawing.Color.Transparent;
+            this.mapViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapViewer.Location = new System.Drawing.Point(0, 45);
+            this.mapViewer.Map = null;
+            this.mapViewer.Margin = new System.Windows.Forms.Padding(0);
+            this.mapViewer.Name = "mapViewer";
+            this.mapViewer.Size = new System.Drawing.Size(592, 399);
+            this.mapViewer.TabIndex = 1;
+            this.mapViewer.ZoomLevel = UO_Atlas.ZoomLevel.PercentOneHundred;
+            this.mapViewer.DoubleClick += new System.EventHandler(this.mapViewer_DoubleClick);
+            this.mapViewer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapViewer_MouseMove);
             // 
-            // menuImportLabels
+            // menuLabels
             // 
-            this.menuImportLabels.Name = "menuImportLabels";
-            this.menuImportLabels.Size = new System.Drawing.Size(191, 22);
-            this.menuImportLabels.Text = "Import &Labels";
-            this.menuImportLabels.Click += new System.EventHandler(this.menuImportLabels_Click);
+            this.menuLabels.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuLabelsImport,
+            this.menuLabelsClearAll});
+            this.menuLabels.Name = "menuLabels";
+            this.menuLabels.Size = new System.Drawing.Size(191, 22);
+            this.menuLabels.Text = "&Labels";
+            // 
+            // menuLabelsImport
+            // 
+            this.menuLabelsImport.Name = "menuLabelsImport";
+            this.menuLabelsImport.Size = new System.Drawing.Size(152, 22);
+            this.menuLabelsImport.Text = "&Import";
+            this.menuLabelsImport.Click += new System.EventHandler(this.menuImportLabels_Click);
+            // 
+            // menuLabelsClearAll
+            // 
+            this.menuLabelsClearAll.Name = "menuLabelsClearAll";
+            this.menuLabelsClearAll.Size = new System.Drawing.Size(152, 22);
+            this.menuLabelsClearAll.Text = "&Clear All";
+            this.menuLabelsClearAll.Click += new System.EventHandler(this.menuLabelsClearAll_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 466);
-            //this.Controls.Add(this.mapViewer);
+            this.Controls.Add(this.mapViewer);
             this.Controls.Add(this.tabControlMaps);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
@@ -364,7 +382,9 @@ namespace UO_Atlas
         private System.Windows.Forms.TabPage tabPageTrammel;
         private System.Windows.Forms.TabPage tabPageFelucca;
         private System.Windows.Forms.TabControl tabControlMaps;
-        private System.Windows.Forms.ToolStripMenuItem menuImportLabels;
+        private System.Windows.Forms.ToolStripMenuItem menuLabels;
+        private System.Windows.Forms.ToolStripMenuItem menuLabelsImport;
+        private System.Windows.Forms.ToolStripMenuItem menuLabelsClearAll;
     }
 }
 

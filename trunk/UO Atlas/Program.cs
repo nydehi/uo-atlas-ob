@@ -1,5 +1,7 @@
 ﻿using System;
-using System.Collections;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 using FirebirdSql.Data.FirebirdClient;
@@ -16,43 +18,9 @@ namespace UO_Atlas
         [STAThread]
         public static void Main(string[] args)
         {
-            Path.Combine(Atlas.MapLabelsFolder, "data.fdb");
+            Atlas.EnsureLabelDatabase();
 
-            string fireBirdReferenceFile = Path.Combine(Application.StartupPath, "FirebirdSql.Data.FirebirdClient.dll");
-            if (!File.Exists(fireBirdReferenceFile))
-            {
-                string fireBirdZipFile = Path.Combine(Application.StartupPath, "fireBirdFiles.zip");
-                using (FileStream outStream = new FileStream(fireBirdZipFile, FileMode.Create))
-                {
-                    byte[] streamData = Resources.FireBirdFiles;
-                    outStream.Write(streamData, 0, streamData.Length);
-                }
-
-                EnsureShell32();
-
-                ExtractFireBirdFiles(fireBirdZipFile);
-                //Shell32.ShellClass shellClass = new Shell32.ShellClass();
-                //Shell32.Folder srcFolder = shellClass.NameSpace(fireBirdZipFile);
-                //Shell32.Folder destFolder = shellClass.NameSpace(Application.StartupPath);
-                //Shell32.FolderItems items = srcFolder.Items();
-                //destFolder.CopyHere(items, 20);
-
-
-                //using(FbConnection connection = new FbConnection(Atlas.MapLabelsDatabaseConnectionString))
-                //{
-                //    connection.Open();
-
-                //    using(FbCommand command = new FbCommand())
-                //    {
-                //        command.CommandText = "Create Table Labels(X SmallInt Not Null, Y SmallInt Not Null, Facet SmallInt Not Null, Text VarChar Not Null)";
-                //        command.Connection = connection;
-
-                //        command.ExecuteNonQuery();
-                //    }
-                //}
-            }
-
-            return;
+            LoadLabelCategories();
 
 
             Application.EnableVisualStyles();
@@ -62,54 +30,70 @@ namespace UO_Atlas
 
 
 
-        private static void EnsureShell32()
+
+        private static void LoadLabelCategories()
         {
-            string shell32ReferenceFile = Path.Combine(Application.StartupPath, "Interop.Shell32.dll");
-            if (File.Exists(shell32ReferenceFile))
+
+            string labelCategoryNamesFilePath = Path.Combine(Application.StartupPath, "Icons.txt");
+            if(!File.Exists(labelCategoryNamesFilePath))
             {
-                return;
-            }
-            
-            using (FileStream outStream = new FileStream(shell32ReferenceFile, FileMode.Create))
-            {
-                byte[] streamData = Resources.Shell32;
-                outStream.Write(streamData, 0, streamData.Length);
-            }
-        }
-
-
-
-        private static void ExtractFireBirdFiles(string zipFile)
-        {
-            string extractionPath = Path.Combine(Application.StartupPath, Path.GetFileNameWithoutExtension(zipFile));
-            Utility.EnsureDirectory(extractionPath);
-
-            Shell32.ShellClass shellClass = new Shell32.ShellClass();
-            Shell32.Folder srcFolder = shellClass.NameSpace(zipFile);
-            Shell32.Folder destFolder = shellClass.NameSpace(extractionPath);
-            destFolder.CopyHere(srcFolder.Items(), 16 | 256 | 512);
-
-
-            string destinationPath = Path.Combine(Application.StartupPath, "FirebirdSql.Data.FirebirdClient.dll");
-            File.Delete(destinationPath);
-            File.Move(Path.Combine(extractionPath, "FirebirdSql.Data.FirebirdClient.dll"), destinationPath);
-
-            string basePath = Path.Combine(Application.StartupPath, "x86");
-            if (IntPtr.Size == 8)
-            {
-                basePath = Path.Combine(Application.StartupPath, "x64");
+                using (FileStream outStream = new FileStream(labelCategoryNamesFilePath, FileMode.Create))
+                {
+                    using(StreamWriter writer = new StreamWriter(outStream))
+                    {
+                        writer.Write(Resources.MapLabelCategories);
+                    }
+                }
             }
 
-            string[] remainingFiles = new string[] { "fbclient.dll", "icudt30.dll", "icuin30.dll", "icuuc30.dll" };
-            
-            foreach(string file in remainingFiles)
+            string labelCategoryIconsFilePath = Path.Combine(Application.StartupPath, "Icons.png");
+            if (!File.Exists(labelCategoryIconsFilePath))
             {
-                destinationPath = Path.Combine(basePath, file);
-                File.Delete(destinationPath);
-                File.Move(Path.Combine(extractionPath, file), destinationPath);
+                
+                using (FileStream outStream = new FileStream(labelCategoryIconsFilePath, FileMode.Create))
+                {
+                    Resources.LabelCategoryIcons.Save(outStream, ImageFormat.Png);
+                }
             }
 
-            Utility.DeleteDirectory(new DirectoryInfo(extractionPath));
+
+            using (StreamReader labelReader = new StreamReader(labelCategoryNamesFilePath))
+            {
+                using (Image icons = Image.FromFile(labelCategoryIconsFilePath))
+                {
+                    int iconX = 0;
+                    int iconY = 0;
+
+                    string labelName;
+                    do
+                    {
+                        labelName = labelReader.ReadLine();
+                        if (string.IsNullOrEmpty(labelName))
+                        {
+                            continue;
+                        }
+
+                        Bitmap labelIcon = new Bitmap(31, 31);
+                        using (Graphics g = Graphics.FromImage(labelIcon))
+                        {
+                            g.DrawImage(icons, new Rectangle(0, 0, 31, 31), iconX, iconY, 31, 31, GraphicsUnit.Pixel);
+                        }
+
+                        iconX += 32;
+                        if (iconX >= icons.Width)
+                        {
+                            iconY += 32;
+                            iconX = 0;
+                        }
+
+                        LabelCategory category = new LabelCategory();
+                        category.Name = labelName;
+                        category.Icon = labelIcon;
+                        Atlas.LabelCategories[labelName.ToUpper()] = category;
+
+                    } while (labelName != null);
+                }
+            }
         }
     }
 }

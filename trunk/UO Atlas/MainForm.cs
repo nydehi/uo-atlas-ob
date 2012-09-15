@@ -77,12 +77,12 @@ namespace UO_Atlas
 
             m_LastKnownLocation = location;
 
-            //if (mapViewer.Map != location.Facet)
-            //{
-            //    mapViewer.Map = location.Facet;
-            //}
+            if (mapViewer.Map != location.Facet)
+            {
+                mapViewer.Map = location.Facet;
+            }
 
-            //mapViewer.SetLocation(location.X, location.Y);
+            mapViewer.SetLocation(location.X, location.Y);
 
             lblPlayerCoords.Text = string.Concat('(', location.X, ',', location.Y, ')');
         }
@@ -91,14 +91,14 @@ namespace UO_Atlas
         {
             BackgroundWorker bw = (BackgroundWorker) sender;
 
-            int trackPlayerDelayInMilliseconds = 1000;
+            const int trackPlayerDelayInMilliseconds = 1000;
             DateTime nextPlayerTrackingTimestamp = DateTime.Now.AddMilliseconds(-trackPlayerDelayInMilliseconds);
 
             while (m_TrackPlayer)
             {
                 while (nextPlayerTrackingTimestamp > DateTime.Now && m_TrackPlayer)
                 {
-                    System.Threading.Thread.Sleep(100);
+                    System.Threading.Thread.Sleep(1);
                 }
                 if (!m_TrackPlayer)
                 {
@@ -155,16 +155,14 @@ namespace UO_Atlas
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            LabelCategory.LoadCache();
+            mapViewer.OnMapChanged += OnMapChanged;
+            mapViewer.OnZoomLevelChanged += OnZoomLevelChanged;
+            mapViewer.OnError += OnError;
 
-            //mapViewer.OnMapChanged += OnMapChanged;
-            //mapViewer.OnZoomLevelChanged += OnZoomLevelChanged;
-            //mapViewer.OnError += OnError;
-
-            //mapViewer.Map = Map.Get(MapName.Felucca);
+            mapViewer.Map = Map.Get(MapName.Felucca);
             cbZoom.SelectedIndex = (int) ZoomLevel.PercentOneHundred;
 
-            //menuTrackPlayer.Checked = true;
+            menuTrackPlayer.Checked = true;
         }
 
 
@@ -176,7 +174,7 @@ namespace UO_Atlas
 
         private void OnZoomLevelChanged(object sender, MapViewerEventArgs e)
         {
-           //cbZoom.SelectedIndex = (int)mapViewer.ZoomLevel;
+           cbZoom.SelectedIndex = (int)mapViewer.ZoomLevel;
         }
 
 
@@ -189,18 +187,18 @@ namespace UO_Atlas
         {
             if (e.Delta < 0)
             {
-                //mapViewer.Zoom(-1);
+                mapViewer.Zoom(-1);
             }
             else if (e.Delta > 0)
             {
-                //mapViewer.Zoom(1);
+                mapViewer.Zoom(1);
             }
         }
 
         private void mapViewer_MouseMove(object sender, MouseEventArgs e)
         {
             // Show the hovered coordinates in the statusbar
-            //lblHoveredCoords.Text = string.Concat('(', mapViewer.HoveredLocation.X, ',', mapViewer.HoveredLocation.Y, ')');
+            lblHoveredCoords.Text = string.Concat('(', mapViewer.HoveredLocation.X, ',', mapViewer.HoveredLocation.Y, ')');
         }
 
         private void menuTrackPlayer_CheckedChanged(object sender, EventArgs e)
@@ -247,12 +245,12 @@ namespace UO_Atlas
 
         private void tabControlMaps_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //mapViewer.Map = Map.Get((MapName)tabControlMaps.SelectedIndex);
+            mapViewer.Map = Map.Get((MapName)tabControlMaps.SelectedIndex);
         }
 
         private void cbZoom_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //mapViewer.ZoomLevel = (ZoomLevel)cbZoom.SelectedIndex;
+            mapViewer.ZoomLevel = (ZoomLevel)cbZoom.SelectedIndex;
         }
 
         private void mapViewer_DoubleClick(object sender, EventArgs e)
@@ -284,25 +282,24 @@ namespace UO_Atlas
                 filesToImportAsLabels = d.FileNames;
             }
 
-            foreach (string fileToImportAsLabels in filesToImportAsLabels)
-            {
-                using (StreamReader reader = new StreamReader(fileToImportAsLabels))
-                {
-                    // The first line is a version number that can be ignored.
-                    reader.ReadLine();
 
-                    UO_Atlas.Label label;
-                    do
-                    {
-                        label = Label.LoadFrom(reader);
-                        if (label != null)
-                        {
-                            Console.WriteLine(label.Category.Name + ": " + label.Text);
-                        }
-                    } while (label != null);
-                    
-                }
-            }
+            MapLabelImporter importer = new MapLabelImporter(filesToImportAsLabels);
+            importer.Start();
+        }
+
+
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            m_TrackPlayer = false;
+
+            base.OnClosing(e);
+        }
+
+
+        private void menuLabelsClearAll_Click(object sender, EventArgs e)
+        {
+            Atlas.DeleteAllLabels();
         }
     }
 }

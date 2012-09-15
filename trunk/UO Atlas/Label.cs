@@ -29,7 +29,13 @@ namespace UO_Atlas
             string categoryString = currentLine.Substring(1, categoryEndIndex - 1);
 
             LabelCategory category;
-            LabelCategory.Cache.TryGetValue(categoryString.ToUpper(), out category);
+            if(!Atlas.LabelCategories.TryGetValue(categoryString, out category))
+            {
+               if(!Atlas.LabelCategories.TryGetValue(categoryString.ToUpper(), out category))
+               {
+                   return null;
+               }
+            }
 
             string[] theOtherParts = currentLine.Substring(categoryEndIndex + 2).Split(new char[] {' '}, 4);
             
@@ -64,48 +70,6 @@ namespace UO_Atlas
     
     internal class LabelCategory
     {
-        public static readonly Dictionary<string, LabelCategory> Cache = new Dictionary<string,LabelCategory>();
-        public static void LoadCache()
-        {
-            using(StreamReader labelReader = new StreamReader("Icons.txt"))
-            {
-                using(Image icons = Image.FromFile("Icons.bmp"))
-                {
-                    int iconX = 0;
-                    int iconY = 0;
-
-                    string labelName;
-                    do
-                    {
-                        labelName = labelReader.ReadLine();
-                        if(string.IsNullOrEmpty(labelName))
-                        {
-                            continue;
-                        }
-
-                        Bitmap labelIcon = new Bitmap(31, 31);
-                        using(Graphics g = Graphics.FromImage(labelIcon))
-                        {
-                            g.DrawImage(icons, new Rectangle(0, 0, 31, 31), iconX, iconY, 31, 31, GraphicsUnit.Pixel);
-                        }
-
-                        iconX += 32;
-                        if(iconX >= icons.Width)
-                        {
-                            iconY += 32;
-                            iconX = 0;
-                        }
-                        
-                        LabelCategory category = new LabelCategory();
-                        category.Name = labelName;
-                        category.Icon = labelIcon;
-                        Cache[labelName.ToUpper()] = category;
-
-                    } while (labelName != null);
-                }
-            }
-        }
-
         public string Name { get; set; }
 
         public Image Icon { get; set; }
