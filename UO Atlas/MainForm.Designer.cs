@@ -1,3 +1,5 @@
+using UO_Atlas.Controls;
+
 namespace UO_Atlas
 {
     partial class MainForm
@@ -53,7 +55,7 @@ namespace UO_Atlas
             this.tabPageTrammel = new System.Windows.Forms.TabPage();
             this.tabPageFelucca = new System.Windows.Forms.TabPage();
             this.tabControlMaps = new System.Windows.Forms.TabControl();
-            this.mapViewer = new UO_Atlas.MapViewer();
+            this.mapViewer = new UO_Atlas.Controls.MapViewer();
             this.menuLabels = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLabelsImport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLabelsClearAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -305,7 +307,7 @@ namespace UO_Atlas
             this.mapViewer.Name = "mapViewer";
             this.mapViewer.Size = new System.Drawing.Size(592, 399);
             this.mapViewer.TabIndex = 1;
-            this.mapViewer.ZoomLevel = UO_Atlas.ZoomLevel.PercentOneHundred;
+            this.mapViewer.ZoomLevel = UO_Atlas.Controls.ZoomLevel.PercentOneHundred;
             this.mapViewer.DoubleClick += new System.EventHandler(this.mapViewer_DoubleClick);
             this.mapViewer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapViewer_MouseMove);
             // 

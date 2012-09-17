@@ -43,7 +43,7 @@ namespace UO_Atlas
 
         private void Calculate()
         {
-            string savePath = Path.Combine(Atlas.MapImagesFolder, "map{0}-{1}.png");
+            string savePath = Path.Combine(Atlas.MapImagesFolder, "map{0}-{1}.bmp");
 
             Array mapNames = Enum.GetValues(typeof(MapName));
             int progressDelta = Convert.ToInt32(Math.Round(100 / (double)mapNames.Length));
@@ -79,7 +79,7 @@ namespace UO_Atlas
                 mapImageResized.Dispose();
 
                 // Zoom 100%
-                mapImage.Save(String.Format(savePath, mapIndex, "100%"), ImageFormat.Png);
+                mapImage.Save(String.Format(savePath, mapIndex, "100%"), ImageFormat.Bmp);
                 mapImage.Dispose();
 
                 GC.Collect();

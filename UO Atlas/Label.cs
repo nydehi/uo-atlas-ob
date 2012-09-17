@@ -28,13 +28,10 @@ namespace UO_Atlas
             }
             string categoryString = currentLine.Substring(1, categoryEndIndex - 1);
 
-            LabelCategory category;
-            if(!Atlas.LabelCategories.TryGetValue(categoryString, out category))
+            LabelCategory category = Atlas.GetLabelCategory(categoryString);
+            if(category == null)
             {
-               if(!Atlas.LabelCategories.TryGetValue(categoryString.ToUpper(), out category))
-               {
-                   return null;
-               }
+                return null;
             }
 
             string[] theOtherParts = currentLine.Substring(categoryEndIndex + 2).Split(new char[] {' '}, 4);

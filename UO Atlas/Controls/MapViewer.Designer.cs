@@ -1,4 +1,4 @@
-namespace UO_Atlas
+namespace UO_Atlas.Controls
 {
     partial class MapViewer
     {
