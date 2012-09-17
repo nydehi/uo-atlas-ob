@@ -8,13 +8,11 @@
  ***************************************************************************/
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Text;
 using System.Windows.Forms;
+using UO_Atlas.Controls;
+
 
 namespace UO_Atlas
 {
@@ -25,10 +23,10 @@ namespace UO_Atlas
             InitializeComponent();
         }
 
-        private bool m_TrackPlayer = false;
+        private bool m_TrackPlayer;
         private PlayerLocation m_LastKnownLocation;
 
-        private bool m_HideControls = false;
+        private bool m_HideControls;
 
         /// <summary>
         /// Get or set whether the player's location will be automatically centered
@@ -153,16 +151,43 @@ namespace UO_Atlas
             }
         }
 
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             mapViewer.OnMapChanged += OnMapChanged;
             mapViewer.OnZoomLevelChanged += OnZoomLevelChanged;
+            mapViewer.OnCoordinatesChanged += OnMapCoordinatesChanged;
+            mapViewer.Paint += OnMapPaint;
             mapViewer.OnError += OnError;
 
             mapViewer.Map = Map.Get(MapName.Felucca);
             cbZoom.SelectedIndex = (int) ZoomLevel.PercentOneHundred;
 
             menuTrackPlayer.Checked = true;
+        }
+
+
+
+        private void OnMapPaint(object sender, PaintEventArgs e)
+        {
+            for(int i = 0; _Labels != null && i < _Labels.Length; i += 1)
+            {
+                Label l = _Labels[i];
+
+                mapViewer.HoveredLocation
+
+                l.Category
+            }
+        }
+
+
+        Label[] _Labels;
+        private void OnMapCoordinatesChanged(object sender, MapViewerEventArgs e)
+        {
+            int xDelta = mapViewer.CanvasSize.Width / 2;
+            int yDelta = mapViewer.CanvasSize.Height / 2;
+
+            _Labels = Atlas.GetLabels(Convert.ToInt16(e.Coordinates.X - xDelta), Convert.ToInt16(e.Coordinates.Y - yDelta), Convert.ToInt16(e.Coordinates.X + xDelta), Convert.ToInt16(e.Coordinates.Y + yDelta), Convert.ToByte(e.Map.Index));
         }
 
 
@@ -178,9 +203,9 @@ namespace UO_Atlas
         }
 
 
-        private void OnError(object sender, string ErrorMessage)
+        private static void OnError(object sender, string errorMessage)
         {
-            MessageBox.Show(ErrorMessage, "An error occured:", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(errorMessage, "An error occured:", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void MainForm_MouseWheel(object sender, MouseEventArgs e)
@@ -234,7 +259,7 @@ namespace UO_Atlas
 
         private void menuExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void menuAbout_Click(object sender, EventArgs e)

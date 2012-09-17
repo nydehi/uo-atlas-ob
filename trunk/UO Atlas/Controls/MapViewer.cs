@@ -15,67 +15,8 @@ using System.Windows.Forms;
 using System.IO;
 
 
-namespace UO_Atlas
+namespace UO_Atlas.Controls
 {
-    public enum ZoomLevel
-    {
-        PercentOneSixteenth = 0,
-        PercentOneEighth,
-        PercentOneQuarter,
-        PercentOneHalf,
-        PercentOneHundred,
-        PercentTwoHundred,
-        PercentFourHundred,
-        PercentEightHundred,
-        PercentSixteenHundred,
-
-        MinimumZoom = PercentOneSixteenth,
-        MaximumZoom = PercentSixteenHundred
-    }
-
-    /// <summary>
-    /// Contains all necessary information to handle different zoom levels
-    /// </summary>
-    public struct ZoomInfo
-    {
-        ZoomLevel m_ZoomLevel;
-        string m_FileName;
-        float m_RealZoom;
-        int m_ImageZoom;
-
-        /// <summary>
-        /// Creates a new ZoomLevel
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="realZoom">the zoom in relation to the map size</param>
-        /// <param name="drawZoom">the zoom in relation to the map-image</param>
-        /// <param name="zoomLevel"></param>
-        public ZoomInfo(ZoomLevel zoomLevel, string fileName, float realZoom, int drawZoom)
-        {
-            m_ZoomLevel = zoomLevel;
-            m_FileName = fileName;
-            m_RealZoom = realZoom;
-            m_ImageZoom = drawZoom;
-        }
-
-        /// <summary>
-        /// Indicates the zoom in an enum
-        /// </summary>
-        public ZoomLevel ZoomLevel { get { return m_ZoomLevel; } }
-        /// <summary>
-        /// The filename of the map-image at the current zoom-level
-        /// </summary>
-        public string FileName { get { return m_FileName; } }
-        /// <summary>
-        /// RealZoom indicates the zoom in relation to the map size
-        /// </summary>
-        public float RealZoom { get { return m_RealZoom; } }
-        /// <summary>
-        /// ImageZoom indicates the zoom of the loaded image
-        /// </summary>
-        public int ImageZoom { get { return m_ImageZoom; } }
-    }
-
     /// <summary>
     /// A control to draw the map
     /// </summary>
@@ -101,16 +42,16 @@ namespace UO_Atlas
 
         private void SetZoomInfo()
         {
-            m_ZoomInfos.Add(ZoomLevel.PercentOneSixteenth, new ZoomInfo(ZoomLevel.PercentOneSixteenth, "map{0}-6.25%.png", 0.06250f, 1));
-            m_ZoomInfos.Add(ZoomLevel.PercentOneEighth, new ZoomInfo(ZoomLevel.PercentOneEighth, "map{0}-12.5%.png", 0.125f, 1));
-            m_ZoomInfos.Add(ZoomLevel.PercentOneQuarter, new ZoomInfo(ZoomLevel.PercentOneQuarter, "map{0}-25%.png", 0.250f, 1));
-            m_ZoomInfos.Add(ZoomLevel.PercentOneHalf, new ZoomInfo(ZoomLevel.PercentOneHalf, "map{0}-50%.png", 0.500f, 1));
-            m_ZoomInfos.Add(ZoomLevel.PercentOneHundred, new ZoomInfo(ZoomLevel.PercentOneHundred, "map{0}-100%.png", 1.000f, 1));
-            m_ZoomInfos.Add(ZoomLevel.PercentTwoHundred, new ZoomInfo(ZoomLevel.PercentTwoHundred, "map{0}-100%.png", 2.0f, 2));
-            m_ZoomInfos.Add(ZoomLevel.PercentFourHundred, new ZoomInfo(ZoomLevel.PercentFourHundred, "map{0}-100%.png", 4.0f, 4));
+            m_ZoomInfos.Add(ZoomLevel.PercentOneSixteenth, new ZoomInfo(ZoomLevel.PercentOneSixteenth, "map{0}-6.25%.bmp", 0.06250f, 1));
+            m_ZoomInfos.Add(ZoomLevel.PercentOneEighth, new ZoomInfo(ZoomLevel.PercentOneEighth, "map{0}-12.5%.bmp", 0.125f, 1));
+            m_ZoomInfos.Add(ZoomLevel.PercentOneQuarter, new ZoomInfo(ZoomLevel.PercentOneQuarter, "map{0}-25%.bmp", 0.250f, 1));
+            m_ZoomInfos.Add(ZoomLevel.PercentOneHalf, new ZoomInfo(ZoomLevel.PercentOneHalf, "map{0}-50%.bmp", 0.500f, 1));
+            m_ZoomInfos.Add(ZoomLevel.PercentOneHundred, new ZoomInfo(ZoomLevel.PercentOneHundred, "map{0}-100%.bmp", 1.000f, 1));
+            m_ZoomInfos.Add(ZoomLevel.PercentTwoHundred, new ZoomInfo(ZoomLevel.PercentTwoHundred, "map{0}-100%.bmp", 2.0f, 2));
+            m_ZoomInfos.Add(ZoomLevel.PercentFourHundred, new ZoomInfo(ZoomLevel.PercentFourHundred, "map{0}-100%.bmp", 4.0f, 4));
 
-            m_ZoomInfos.Add(ZoomLevel.PercentEightHundred, new ZoomInfo(ZoomLevel.PercentEightHundred, "map{0}-100%.png", 8.0f, 8));
-            m_ZoomInfos.Add(ZoomLevel.PercentSixteenHundred, new ZoomInfo(ZoomLevel.PercentSixteenHundred, "map{0}-100%.png", 16.0f, 16));
+            m_ZoomInfos.Add(ZoomLevel.PercentEightHundred, new ZoomInfo(ZoomLevel.PercentEightHundred, "map{0}-100%.bmp", 8.0f, 8));
+            m_ZoomInfos.Add(ZoomLevel.PercentSixteenHundred, new ZoomInfo(ZoomLevel.PercentSixteenHundred, "map{0}-100%.bmp", 16.0f, 16));
         }
 
         private Map m_Map;
@@ -469,6 +410,18 @@ namespace UO_Atlas
                 SetLocation(m_CenterLocation.X - offsetX, m_CenterLocation.Y - offsetY);
             }
         }
+
+
+
+        public Point ConvertMouseCoordinatesToMapCoordinates(int x, int y)
+        {
+            x = (int)(m_PaintLocation.X + x / RealZoom) % m_Map.Width;
+            y = (int)(m_PaintLocation.Y + y / RealZoom) % m_Map.Height;
+
+            return new Point(x, y);
+        }
+
+
 
         private void MapViewer_MouseClick(object sender, MouseEventArgs e)
         {

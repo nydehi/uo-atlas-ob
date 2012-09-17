@@ -65,12 +65,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Action.cs" />
+    <Compile Include="Controls\CodeProjectImageScroller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ImageViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ImageViewer.Designer.cs">
+      <DependentUpon>ImageViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MapViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\MapViewer.Designer.cs">
       <DependentUpon>MapViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ZoomInfo.cs" />
+    <Compile Include="Controls\ZoomLevel.cs" />
     <Compile Include="Dialogs\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

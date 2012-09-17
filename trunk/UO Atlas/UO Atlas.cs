@@ -10,6 +10,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO.Compression;
 using System.Windows.Forms;
 using System.IO;
@@ -234,13 +235,157 @@ namespace UO_Atlas
 
 
 
-        internal static readonly Dictionary<string, LabelCategory> LabelCategories = new Dictionary<string, LabelCategory>();
-
-
-
-        internal static Label[] GetLabels(Rectangle bounds)
+        private static Dictionary<string, LabelCategory> _LabelCategories;
+        private static Dictionary<string, LabelCategory> LabelCategories
         {
-            throw new NotImplementedException();
+            get
+            {
+                if(_LabelCategories == null)
+                {
+                    _LabelCategories = new Dictionary<string, LabelCategory>();
+                    LoadLabelCategories();
+                }
+
+                return _LabelCategories;
+            }
+        }
+
+
+
+        private static void LoadLabelCategories()
+        {
+            string labelCategoryNamesFilePath = Path.Combine(Application.StartupPath, "Icons.txt");
+            if (!File.Exists(labelCategoryNamesFilePath))
+            {
+                using (FileStream outStream = new FileStream(labelCategoryNamesFilePath, FileMode.Create))
+                {
+                    using (StreamWriter writer = new StreamWriter(outStream))
+                    {
+                        writer.Write(Resources.MapLabelCategories);
+                    }
+                }
+            }
+
+            string labelCategoryIconsFilePath = Path.Combine(Application.StartupPath, "Icons.png");
+            if (!File.Exists(labelCategoryIconsFilePath))
+            {
+
+                using (FileStream outStream = new FileStream(labelCategoryIconsFilePath, FileMode.Create))
+                {
+                    Resources.LabelCategoryIcons.Save(outStream, ImageFormat.Png);
+                }
+            }
+
+
+            using (StreamReader labelReader = new StreamReader(labelCategoryNamesFilePath))
+            {
+                using (Image icons = Image.FromFile(labelCategoryIconsFilePath))
+                {
+                    int iconX = 0;
+                    int iconY = 0;
+
+                    string labelName;
+                    do
+                    {
+                        labelName = labelReader.ReadLine();
+                        if (string.IsNullOrEmpty(labelName))
+                        {
+                            continue;
+                        }
+
+                        Bitmap labelIcon = new Bitmap(31, 31);
+                        using (Graphics g = Graphics.FromImage(labelIcon))
+                        {
+                            g.DrawImage(icons, new Rectangle(0, 0, 31, 31), iconX, iconY, 31, 31, GraphicsUnit.Pixel);
+                        }
+
+                        iconX += 32;
+                        if (iconX >= icons.Width)
+                        {
+                            iconY += 32;
+                            iconX = 0;
+                        }
+
+                        LabelCategory category = new LabelCategory();
+                        category.Name = labelName;
+                        category.Icon = labelIcon;
+                        Atlas.LabelCategories[labelName.ToUpper()] = category;
+
+                    } while (labelName != null);
+                }
+            }
+        }
+
+
+
+        internal static LabelCategory GetLabelCategory(string name)
+        {
+            LabelCategory category;
+            if (LabelCategories.TryGetValue(name, out category))
+            {
+                return category;
+            }
+
+            LabelCategories.TryGetValue(name.ToUpper(), out category);
+            return category;
+        }
+
+
+
+        internal static Label[] GetLabels(short xMin, short yMin, short xMax, short yMax, byte facet)
+        {
+            EnsureFireBirdSetup();
+            EnsureLabelDatabase();
+
+
+            List<Label> labels = new List<Label>(64);
+
+            try
+            {
+                using (FbConnection connection = new FbConnection(MapLabelsDatabaseConnectionString))
+                {
+                    connection.Open();
+
+                    using (FbCommand command = new FbCommand())
+                    {
+                        command.Connection = connection;
+
+                        command.CommandText = "Select Count(X) From Labels;";
+                        Console.WriteLine(command.ExecuteScalar());
+
+                        command.Parameters.AddWithValue("@minX", xMin);
+                        command.Parameters.AddWithValue("@maxX", xMax);
+                        command.Parameters.AddWithValue("@minY", yMin);
+                        command.Parameters.AddWithValue("@maxY", yMax);
+                        command.Parameters.AddWithValue("@facet", facet);
+
+                        command.CommandText = "Select X, Y, Facet, Category, Text From Labels Where X >= @minX And X <= @maxX And Y >= @minY And Y <= @maxY And Facet = @facet Order By Y Desc, X Desc;";
+                        
+                        using (FbDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Label l = new Label();
+
+                                l.X = reader.GetInt16(0);
+                                l.Y = reader.GetInt16(1);
+                                l.Facet = Convert.ToByte(reader.GetInt16(2));
+                                l.Category = LabelCategories[reader.GetString(3)];
+                                l.Text = reader.GetString(4);
+
+                                labels.Add(l);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception generalError)
+            {
+                throw;
+            }
+            
+
+            return labels.ToArray();
         }
 
 
